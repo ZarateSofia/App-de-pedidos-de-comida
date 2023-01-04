@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.mavenproject1.InicioSesionController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="36.0" prefWidth="390.0" text="The Good Burguer Restaurant" textAlignment="CENTER" textFill="#cd7810">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="67.0" text="Usuario:" />
+                  <TextField prefHeight="25.0" prefWidth="156.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="67.0" text="Contraseña:" />
+                  <TextField prefHeight="25.0" prefWidth="156.0" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <Button mnemonicParsing="false" style="-fx-background-color: #cd7810;" text="Ingresar">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
