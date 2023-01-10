@@ -23,6 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -231,6 +232,14 @@ public class VentanaInicioController implements Initializable {
         }
         imgvubicacion.setLayoutX(300);
         imgvubicacion.setLayoutY(400);
+        
+        imgvubicacion.setOnMouseClicked(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event ){
+                
+            }
+        });
+        
         
         paneroot.getChildren().addAll(imgvmapa,btnregresar,imgvubicacion);
         Scene scene=new Scene(paneroot,950,650);
