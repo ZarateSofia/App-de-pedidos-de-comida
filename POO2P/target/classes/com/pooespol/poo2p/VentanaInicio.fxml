@@ -9,25 +9,28 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pooespol.poo2p.VentanaInicioController">
+<VBox fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pooespol.poo2p.VentanaInicioController">
    <children>
-      <HBox prefHeight="123.0" prefWidth="600.0">
+      <HBox alignment="CENTER" prefHeight="76.0" prefWidth="750.0">
          <children>
             <Label alignment="TOP_CENTER" text="The Good Burger Restaurant" textFill="#68e118">
                <HBox.margin>
-                  <Insets left="160.0" top="40.0" />
+                  <Insets />
                </HBox.margin>
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="33.0" />
                </font>
             </Label>
          </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
       </HBox>
-      <HBox prefHeight="36.0" prefWidth="600.0">
+      <HBox alignment="CENTER" prefHeight="36.0" prefWidth="600.0" spacing="20.0">
          <children>
-            <Label alignment="TOP_CENTER" text="Usuario:" textFill="#171717">
+            <Label alignment="TOP_CENTER" prefHeight="21.0" prefWidth="85.0" text="Usuario:" textFill="#171717">
                <HBox.margin>
-                  <Insets left="180.0" right="90.0" />
+                  <Insets />
                </HBox.margin>
                <font>
                   <Font name="System Bold" size="15.0" />
@@ -35,41 +38,38 @@
             </Label>
             <TextField fx:id="txtUsuario">
                <HBox.margin>
-                  <Insets left="-48.0" />
+                  <Insets />
                </HBox.margin>
             </TextField>
          </children>
          <VBox.margin>
-            <Insets />
+            <Insets bottom="20.0" top="20.0" />
          </VBox.margin>
-         <padding>
-            <Insets bottom="15.0" />
-         </padding>
       </HBox>
-      <HBox prefHeight="43.0" prefWidth="600.0">
+      <HBox alignment="CENTER" prefHeight="43.0" prefWidth="600.0" spacing="20.0">
          <children>
-            <Label alignment="TOP_CENTER" text="Contraseña:" textFill="#171717">
+            <Label alignment="TOP_CENTER" prefHeight="21.0" prefWidth="85.0" text="Contraseña:" textFill="#171717">
                <HBox.margin>
-                  <Insets left="180.0" right="90.0" />
+                  <Insets />
                </HBox.margin>
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
-               <padding>
-                  <Insets left="-4.0" />
-               </padding>
             </Label>
             <TextField fx:id="txtContraseña">
                <HBox.margin>
-                  <Insets left="-70.0" />
+                  <Insets />
                </HBox.margin>
             </TextField>
          </children>
          <VBox.margin>
-            <Insets />
+            <Insets top="20.0" />
          </VBox.margin>
+         <padding>
+            <Insets bottom="20.0" />
+         </padding>
       </HBox>
-      <HBox fx:id="seccionAbajo" prefHeight="100.0" prefWidth="200.0">
+      <HBox fx:id="seccionAbajo" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
             <ImageView fx:id="imgvFotoRepartidor" fitHeight="150.0" fitWidth="187.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
@@ -78,7 +78,7 @@
             </ImageView>
             <Button fx:id="btIngresar" mnemonicParsing="false" onAction="#Ingresar" style="-fx-background-color: orange;" text="Ingresar">
                <HBox.margin>
-                  <Insets left="60.0" top="60.0" />
+                  <Insets left="60.0" />
                </HBox.margin>
             </Button>
             <ImageView fx:id="imgvFotoHamburguesa" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">

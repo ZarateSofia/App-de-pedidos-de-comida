@@ -1,4 +1,5 @@
 Nombre,Apellido,Usuario,Contraseña,Direccion,NumTarjeta
 Camilo,Suarez,csuarez,ci202021,Miami,0000000000000
-Cesar,Dominguez,cdoming,matricula3,Tokyo,192323234937462
+Cesar,Dominguez,cdoming,matricula3,Tokyo,5358196017583942
 Eso,Tilin,esotilin,vayatilin,Machala,99999999999999999
+Sofia,Zarate,szarate,contra,Machala,5264869186401004
