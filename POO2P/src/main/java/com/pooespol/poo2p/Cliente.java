@@ -108,7 +108,6 @@ public class Cliente {
     
       public static String[] CargarClientes(){
         try(BufferedReader bf=new BufferedReader(new FileReader(App.ruta+"Clientes.txt"))){
-        String primeralinea=bf.readLine();
         String linea= bf.readLine();
         for(int i=0; i<listaClientes.length-1;i++){
         while(linea!=null){

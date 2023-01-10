@@ -18,27 +18,26 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
 public class VentanaInicioController implements Initializable {
-
     public ArrayList<Cliente> listacl=Cliente.CargarClientesCl();
     public String[] lista=Cliente.CargarClientes();
     public Cliente cliente;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        VBoxroot.setStyle("-fx-background-color: white");
         try(FileInputStream input=new FileInputStream(App.ruta+"FotoRepartidor.jpg")){
         Image image=new Image(input,100,100,false,false);
         imgvFotoRepartidor.setImage(image);
@@ -50,9 +49,12 @@ public class VentanaInicioController implements Initializable {
         imgvFotoHamburguesa.setImage(image);
         }catch(IOException e){
             System.out.println("Archivo no encontrado");            
-        }       
+        }
+
+        
     } 
-    
+    @FXML
+    private VBox VBoxroot;
     @FXML
     private  TextField txtUsuario;
     @FXML

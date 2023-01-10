@@ -1,7 +1,5 @@
 package com.pooespol.poo2p;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
