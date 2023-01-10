@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pooespol.poo2p.VentanaInicioController">
+   <children>
+      <HBox prefHeight="123.0" prefWidth="600.0">
+         <children>
+            <Label alignment="TOP_CENTER" text="The Good Burger Restaurant" textFill="#68e118">
+               <HBox.margin>
+                  <Insets left="160.0" top="40.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox prefHeight="36.0" prefWidth="600.0">
+         <children>
+            <Label alignment="TOP_CENTER" text="Usuario:" textFill="#171717">
+               <HBox.margin>
+                  <Insets left="180.0" right="90.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtUsuario">
+               <HBox.margin>
+                  <Insets left="-48.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="15.0" />
+         </padding>
+      </HBox>
+      <HBox prefHeight="43.0" prefWidth="600.0">
+         <children>
+            <Label alignment="TOP_CENTER" text="Contraseña:" textFill="#171717">
+               <HBox.margin>
+                  <Insets left="180.0" right="90.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <padding>
+                  <Insets left="-4.0" />
+               </padding>
+            </Label>
+            <TextField fx:id="txtContraseña">
+               <HBox.margin>
+                  <Insets left="-70.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+      <HBox fx:id="seccionAbajo" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <ImageView fx:id="imgvFotoRepartidor" fitHeight="150.0" fitWidth="187.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </ImageView>
+            <Button fx:id="btIngresar" mnemonicParsing="false" onAction="#Ingresar" style="-fx-background-color: orange;" text="Ingresar">
+               <HBox.margin>
+                  <Insets left="60.0" top="60.0" />
+               </HBox.margin>
+            </Button>
+            <ImageView fx:id="imgvFotoHamburguesa" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets left="65.0" />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
+   </children>
+</VBox>
