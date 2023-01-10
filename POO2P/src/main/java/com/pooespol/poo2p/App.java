@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
-    private static Scene scene;
+    public static Scene scene;
     public static String ruta ="src/main/resources/com/pooespol/poo2p/";
 
     @Override
@@ -25,6 +25,7 @@ public class App extends Application {
         scene=new Scene(root);
         stage.setScene(scene);
         stage.show();
+        
     }
     
     public static void setRoot(String fxml) throws IOException {

@@ -152,10 +152,13 @@ public class VentanaInicioController implements Initializable {
 
         VBoxDerecha.getChildren().addAll(lbBienvenida,lbMsg01,btnBuscarLocal,btnHacerPedido);
         root.getChildren().addAll(imgv,VBoxDerecha);
-        Scene scene=new Scene(root,750,500);
-        Stage stage=new Stage();
-        stage.setScene(scene);
-        stage.show();   
+//        Scene scene=new Scene(root,750,500);
+//        App.scene=new Scene(root,750,500);
+//        Stage stage=new Stage();
+//        stage.setScene(scene);
+//        stage.show(); 
+        App.scene.setRoot(root);
+        
     }
     
     public boolean ValidarUsuario() {

@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 
 public class Cliente {
-    private String Nombre,Apellido, Usuario,Contraseña,Direccion;
+    private String Nombre,Apellido,Usuario,Contraseña,Direccion;
     private String TarjetaCredito;
     public static ArrayList<Cliente> listaClientescl=new ArrayList<>();
     public static String[] listaClientes=new String[100];
