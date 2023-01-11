@@ -4,6 +4,7 @@ package com.pooespol.poo2p;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 
@@ -53,7 +54,7 @@ public class Comida {
     
     
     public static ArrayList<Comida> CargarMenu(){
-        try(BufferedReader bf=new BufferedReader(new FileReader(App.ruta+"Menu.txt"))){
+        try(BufferedReader bf=new BufferedReader(new FileReader(App.ruta+"Menu.txt",StandardCharsets.UTF_8))){
         String linea= bf.readLine();
         while(linea!=null){
             String datos[]=linea.strip().split(",");
