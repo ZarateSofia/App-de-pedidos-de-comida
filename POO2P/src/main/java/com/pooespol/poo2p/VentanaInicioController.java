@@ -124,6 +124,7 @@ public class VentanaInicioController implements Initializable {
         btnBuscarLocal.setText("Encuentra el local más cercano");
         btnBuscarLocal.setLayoutY(200);
         btnBuscarLocal.setStyle("-fx-background-color:orange;");
+        
         //--CONTROLADOR DE EVENTOS PARA MOSTRAR MAPA//
         btnBuscarLocal.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
             @Override
