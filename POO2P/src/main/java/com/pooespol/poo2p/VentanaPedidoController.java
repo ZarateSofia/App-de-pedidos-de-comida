@@ -1,5 +1,6 @@
 package com.pooespol.poo2p;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -9,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
@@ -24,6 +26,7 @@ public class VentanaPedidoController implements Initializable {
         CargarTipoComida();
         MostrarComidaPorTipo();
         Limpiar();
+        switchToVentanaDireccion();
 
 
     }
@@ -45,6 +48,8 @@ public class VentanaPedidoController implements Initializable {
     private Button btnLimpiar;
     @FXML
     private GridPane TablaComida;
+    @FXML
+    private TableView TablaPedidos;
     
 
     public void CargarTipoComida() {
@@ -65,10 +70,11 @@ public class VentanaPedidoController implements Initializable {
                         }
                     }
                     try{
-                    AgregarComidaPorTipo();
+                        AgregarComidaPorTipo();
                     }catch(RuntimeException e1){
                         System.out.println(e1.getMessage());
                     }
+                    
                     break;
                 case "PLATO FUERTE F":
                     for(Comida i:Comida.CargarMenu()){
@@ -77,7 +83,7 @@ public class VentanaPedidoController implements Initializable {
                         }
                     }
                     try{
-                    AgregarComidaPorTipo();
+                        AgregarComidaPorTipo();
                     }catch(RuntimeException e1){
                         System.out.println(e1.getMessage());
                     }
@@ -89,7 +95,7 @@ public class VentanaPedidoController implements Initializable {
                         }
                     }
                     try{
-                    AgregarComidaPorTipo();
+                        AgregarComidaPorTipo();
                     }catch(RuntimeException e1){
                         System.out.println(e1.getMessage());
                     }
@@ -101,7 +107,7 @@ public class VentanaPedidoController implements Initializable {
                         }
                     }
                     try{
-                    AgregarComidaPorTipo();
+                        AgregarComidaPorTipo();
                     }catch(RuntimeException e1){
                         System.out.println(e1.getMessage());
                     }
@@ -142,8 +148,18 @@ public class VentanaPedidoController implements Initializable {
                 TablaComida.add(cantidad,2,i);
                 TablaComida.add(btnAgregar,3,i);
                 i++;
-                    
-            } 
+                
+                //TRATANDO DE METER ELEMENTOS EN LA TABLA DE PEDIDO
+                btnAgregar.addEventHandler(ActionEvent.ACTION, (ActionEvent t) -> {
+                    if(cantidad.getText()!=null){
+                        TablaPedidos.getItems().addAll(j.getDescripcion(),cantidad.getText(),String.valueOf(j.getPrecio()));
+                    }else{
+                        
+                    }
+                });
+
+                
+            }
         Lista.clear();
         }//for i
         
@@ -153,8 +169,23 @@ public class VentanaPedidoController implements Initializable {
     public void Limpiar(){
         btnLimpiar.addEventHandler(ActionEvent.ACTION, (ActionEvent t) -> {
             TablaComida.getChildren().clear(); 
+            TablaPedidos.getItems().clear();
+            txtTotal.setText("0.00");
+            txtSubtotal.setText("0.00");
+            txtIva.setText("0.00");
         });
     }//INCOMPLETO
-
+    
+    
+    private void switchToVentanaDireccion(){
+        btnContinuar.addEventHandler(ActionEvent.ACTION, (ActionEvent t) -> {
+            try {
+                App.setRoot("VentanaDireccion");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        
+    }
     
 }//clase

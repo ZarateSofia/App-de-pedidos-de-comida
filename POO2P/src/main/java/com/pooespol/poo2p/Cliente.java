@@ -108,16 +108,16 @@ public class Cliente {
     
       public static String[] CargarClientes(){
         try(BufferedReader bf=new BufferedReader(new FileReader(App.ruta+"Clientes.txt"))){
-        String linea= bf.readLine();
-        for(int i=0; i<listaClientes.length-1;i++){
-        while(linea!=null){
-            String datos[]=linea.strip().split(",");
-            Cliente cl=new Cliente(datos[0],datos[1],datos[2],datos[3],datos[4],datos[5]);
-            listaClientes[i]=cl.toString();
-            linea=bf.readLine();
-            i++;
-        } //while
-        }//for
+            String linea= bf.readLine();
+            for(int i=0; i<listaClientes.length-1;i++){
+                while(linea!=null){
+                    String datos[]=linea.strip().split(",");
+                    Cliente cl=new Cliente(datos[0],datos[1],datos[2],datos[3],datos[4],datos[5]);
+                    listaClientes[i]=cl.toString();
+                    linea=bf.readLine();
+                    i++;
+                } //while
+            }//for
         }catch(IOException e){
                     System.out.println("Archivo no encontrado");
         }

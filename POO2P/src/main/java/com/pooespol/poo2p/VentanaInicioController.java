@@ -204,8 +204,8 @@ public class VentanaInicioController implements Initializable {
         Pane paneroot=new Pane();
         ImageView imgvmapa=new ImageView();
         try(FileInputStream input=new FileInputStream(App.ruta+"Mapa2.png")){
-        Image image=new Image(input,1000,1000,false,false);
-        imgvmapa.setImage(image);
+            Image image=new Image(input,1000,1000,false,false);
+            imgvmapa.setImage(image);
         }catch(IOException e){
             System.out.println("Archivo no encontrado");            
         }
@@ -219,6 +219,7 @@ public class VentanaInicioController implements Initializable {
         btnregresar.setLayoutX(850);
         btnregresar.setLayoutY(608);
         btnregresar.setStyle("-fx-background-color:orange;");
+        
         btnregresar.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent t) {
