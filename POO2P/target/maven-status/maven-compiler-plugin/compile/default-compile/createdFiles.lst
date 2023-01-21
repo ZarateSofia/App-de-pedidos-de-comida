@@ -1,3 +1,7 @@
-com\pooespol\poo2p\VentanaInicioController.class
-com\pooespol\poo2p\App.class
+com\pooespol\poo2p\VentanaPedidoController.class
+modelo\Local.class
 module-info.class
+com\pooespol\poo2p\VentanaDireccionController.class
+com\pooespol\poo2p\App.class
+modelo\Cliente.class
+modelo\Comida.class

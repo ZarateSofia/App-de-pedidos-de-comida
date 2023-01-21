@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -29,7 +30,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
+import modelo.Local;
 
 
 public class VentanaInicioController implements Initializable {
@@ -167,7 +170,6 @@ public class VentanaInicioController implements Initializable {
 //        stage.setScene(scene);
 //        stage.show(); 
         App.scene.setRoot(root);
-        
     }
     
     public boolean ValidarUsuario() {
@@ -184,11 +186,8 @@ public class VentanaInicioController implements Initializable {
             txtUsuario.clear();
             txtContraseña.clear();
             return false;
-
         }
-
         return true;
-
     }
     
     public String CargarNombre() {
@@ -231,35 +230,84 @@ public class VentanaInicioController implements Initializable {
                 CargarVentanaBienvenida();
             }
         });
-        // PARA PONER LOS SIMBOLOS DE UBICACIÓN
-        ImageView imgvubicacion=new ImageView();
-        try(FileInputStream input=new FileInputStream(App.rutaImage+"Ubicacion.png")){
-        Image image=new Image(input,50,50,false,false);
-        imgvubicacion.setImage(image);
-        }catch(IOException e){
-            System.out.println("Archivo no encontrado");            
-        }
-        imgvubicacion.setLayoutX(300);
-        imgvubicacion.setLayoutY(400);
         
-        imgvubicacion.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent event ){
-                
-            }
-        });
+        //llamando metodo para mostrar imagenes de ubicaciones
+//        cargarUbicaciones(paneroot);
         
-        
-        paneroot.getChildren().addAll(imgvmapa,btnregresar,imgvubicacion);
+//       imgvubicacion.setOnMouseClicked(new EventHandler<MouseEvent>(){
+//            @Override
+//            public void handle(MouseEvent event ){
+//                
+//            }
+//       });
+
+        paneroot.getChildren().addAll(imgvmapa,btnregresar);
         Scene scene=new Scene(paneroot,950,650);
         Stage stage=new Stage();
         stage.setScene(scene);
         stage.show();
+        
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ArrayList<Local> listaLocales=Local.cargarLocales();
+                for(Local l:listaLocales){
+                    //numero aleatorio
+                    long aleatorio = ((int)(Math.random()*10+1))*1000;
+                    ImageView imgvubicacion=new ImageView();
+                    // PARA PONER LOS SIMBOLOS DE UBICACIÓN
+                    try(FileInputStream input=new FileInputStream(App.rutaImage+"Ubicacion.png")){
+                        Image image=new Image(input,50,50,false,false);
+                        imgvubicacion.setImage(image);
+                    }catch(IOException e){
+                        System.out.println("Archivo no encontrado"); 
+                    }//try para poner imagen  
+
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            imgvubicacion.setLayoutX(l.getCoordenadaX());
+                            imgvubicacion.setLayoutY(l.getCoordenadaY());
+                            paneroot.getChildren().add(imgvubicacion);
+                        }//metodo run de platform
+                    });//run 2
+                    
+                    imgvubicacion.setOnMouseClicked(new EventHandler<MouseEvent>(){
+                        @Override
+                        public void handle(MouseEvent event ){
+//                            Popup popup=new Popup();
+//                            Label nombreLocal=new Label(l.getNombre());
+//                            Label horario=new Label(l.getHorario());
+//                            Label direccion=new Label(l.getDireccion());
+//                            
+//                            popup.getContent().addAll(nombreLocal,horario,direccion);
+//                            
+//                            if(!popup.isShowing()){
+//                                popup.show(stage);
+//                            }else{
+//                                popup.hide();
+//                            }
+                        }
+                    });
+                    
+                    try{
+//                        System.out.println(aleatorio);
+                        Thread.sleep(aleatorio);
+
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }//try para sleep
+                }//for
+            }// run 1
+        });
+        
+        t.setDaemon(true);
+        t.start();
    
     } //INCOMPLETO
   
-
     
+        
 }
 
 

@@ -114,7 +114,7 @@ public class VentanaPedidoController implements Initializable {
                     }
                     break;
                     
-            }//fin siwitch
+            }//fin switch
 
         } //fin handle
               
