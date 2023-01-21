@@ -2,6 +2,7 @@
 package com.pooespol.poo2p;
 
 
+import modelo.Cliente;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -32,27 +33,10 @@ import javafx.stage.Stage;
 
 
 public class VentanaInicioController implements Initializable {
-    public ArrayList<Cliente> listacl=Cliente.CargarClientesCl();
-    public String[] lista=Cliente.CargarClientes();
+    public ArrayList<Cliente> listaClientes=Cliente.CargarClientesCl();
+    public String[] listaDatosClientes=Cliente.CargarClientes();
     public Cliente cliente;
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        VBoxroot.setStyle("-fx-background-color: white");
-        try(FileInputStream input=new FileInputStream(App.ruta+"FotoRepartidor.jpg")){
-        Image image=new Image(input,100,100,false,false);
-        imgvFotoRepartidor.setImage(image);
-        }catch(IOException e){
-            System.out.println("Archivo no encontrado");            
-        }
-        try(FileInputStream input=new FileInputStream(App.ruta+"FotoHamburguesa.jpg")){
-        Image image=new Image(input,100,100,false,false);
-        imgvFotoHamburguesa.setImage(image);
-        }catch(IOException e){
-            System.out.println("Archivo no encontrado");            
-        }
-
-        
-    } 
+    
     @FXML
     private VBox VBoxroot;
     @FXML
@@ -67,13 +51,34 @@ public class VentanaInicioController implements Initializable {
     private Button btnIngresar;
     @FXML
     private HBox seccionAbajo;
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        agregarEstiloVentanaInicio();        
+    } 
 
 
+    public void agregarEstiloVentanaInicio(){
+        VBoxroot.setStyle("-fx-background-color: white");
+        try(FileInputStream input=new FileInputStream(App.rutaImage+"FotoRepartidor.jpg")){
+            Image image=new Image(input,100,100,false,false);
+            imgvFotoRepartidor.setImage(image);
+        }catch(IOException e){
+            System.out.println("Archivo no encontrado");            
+        }
+        
+        try(FileInputStream input=new FileInputStream(App.rutaImage+"FotoHamburguesa.jpg")){
+            Image image=new Image(input,100,100,false,false);
+            imgvFotoHamburguesa.setImage(image);
+        }catch(IOException e){
+            System.out.println("Archivo no encontrado");            
+        }
+    }
     
     @FXML
     public void Ingresar(ActionEvent action) throws IOException {
         if(ValidarUsuario()){ 
-        CargarVentanaBienvenida();
+            CargarVentanaBienvenida();
         }
     }
     
@@ -83,9 +88,9 @@ public class VentanaInicioController implements Initializable {
         HBox root=new HBox();
         root.setStyle("-fx-background-color: black");
         ImageView imgv=new ImageView();
-        try(FileInputStream input=new FileInputStream(App.ruta+"Hamburguesa1.jpg")){
-        Image image=new Image(input,1200,1000,false,false);
-        imgv.setImage(image);
+        try(FileInputStream input=new FileInputStream(App.rutaImage+"Hamburguesa1.jpg")){
+            Image image=new Image(input,1200,1000,false,false);
+            imgv.setImage(image);
         }catch(IOException e){
             System.out.println("Archivo no encontrado");            
         }
@@ -147,7 +152,7 @@ public class VentanaInicioController implements Initializable {
             @Override
             public void handle(ActionEvent t) {
                 try{
-                App.setRoot("VentanaPedido");
+                    App.setRoot("VentanaPedido");
                 }catch(IOException e){
                     System.out.println("Algo sucedió al tratar de cambiar a ventanaPedido");
                 }
@@ -169,7 +174,7 @@ public class VentanaInicioController implements Initializable {
         String usuario = txtUsuario.getText();
         String contraseña = txtContraseña.getText();
         String datos = usuario + " " + contraseña;
-        if (Arrays.asList(lista).contains(datos)) {
+        if (Arrays.asList(listaDatosClientes).contains(datos)) {
 
         } else {
             Alert alerta = new Alert(Alert.AlertType.ERROR);
@@ -191,7 +196,7 @@ public class VentanaInicioController implements Initializable {
         String usuario = txtUsuario.getText();
         String contraseña = txtContraseña.getText();
         cliente = new Cliente(txtUsuario.getText(), txtContraseña.getText());
-        for (Cliente i : listacl) {
+        for (Cliente i : listaClientes) {
             if (i.getUsuario().equals(usuario) && i.getContraseña().equals(contraseña)) {
                 cliente = i;
                 nombre=cliente.getNombre();
@@ -203,7 +208,7 @@ public class VentanaInicioController implements Initializable {
     public void MostrarMapa(){
         Pane paneroot=new Pane();
         ImageView imgvmapa=new ImageView();
-        try(FileInputStream input=new FileInputStream(App.ruta+"Mapa2.png")){
+        try(FileInputStream input=new FileInputStream(App.rutaImage+"Mapa2.png")){
             Image image=new Image(input,1000,1000,false,false);
             imgvmapa.setImage(image);
         }catch(IOException e){
@@ -228,7 +233,7 @@ public class VentanaInicioController implements Initializable {
         });
         // PARA PONER LOS SIMBOLOS DE UBICACIÓN
         ImageView imgvubicacion=new ImageView();
-        try(FileInputStream input=new FileInputStream(App.ruta+"Ubicacion.png")){
+        try(FileInputStream input=new FileInputStream(App.rutaImage+"Ubicacion.png")){
         Image image=new Image(input,50,50,false,false);
         imgvubicacion.setImage(image);
         }catch(IOException e){

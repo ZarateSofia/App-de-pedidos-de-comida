@@ -1,6 +1,7 @@
 
-package com.pooespol.poo2p;
+package modelo;
 
+import com.pooespol.poo2p.App;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -88,7 +89,7 @@ public class Cliente {
  
     
     public static ArrayList<Cliente> CargarClientesCl(){
-        try(BufferedReader bf=new BufferedReader(new FileReader(App.ruta+"Clientes.txt"))){
+        try(BufferedReader bf=new BufferedReader(new FileReader(App.rutaFile+"Clientes.txt"))){
         String linea= bf.readLine();
         while(linea!=null){
             String datos[]=linea.strip().split(",");
@@ -107,7 +108,7 @@ public class Cliente {
     
     
       public static String[] CargarClientes(){
-        try(BufferedReader bf=new BufferedReader(new FileReader(App.ruta+"Clientes.txt"))){
+        try(BufferedReader bf=new BufferedReader(new FileReader(App.rutaFile+"Clientes.txt"))){
             String linea= bf.readLine();
             for(int i=0; i<listaClientes.length-1;i++){
                 while(linea!=null){

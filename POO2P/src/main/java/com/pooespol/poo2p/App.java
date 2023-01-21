@@ -14,7 +14,8 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     public static Scene scene;
-    public static String ruta ="src/main/resources/com/pooespol/poo2p/";
+    public static String rutaImage ="src/main/resources/images/";
+    public static String rutaFile ="src/main/resources/files/";
 
     @Override
     public void start(Stage stage) throws Exception {

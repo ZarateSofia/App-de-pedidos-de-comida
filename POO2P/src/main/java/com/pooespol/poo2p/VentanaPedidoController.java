@@ -1,5 +1,6 @@
 package com.pooespol.poo2p;
 
+import modelo.Comida;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;

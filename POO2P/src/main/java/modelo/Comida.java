@@ -1,6 +1,7 @@
 
-package com.pooespol.poo2p;
+package modelo;
 
+import com.pooespol.poo2p.App;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -54,7 +55,7 @@ public class Comida {
     
     
     public static ArrayList<Comida> CargarMenu(){
-        try(BufferedReader bf=new BufferedReader(new FileReader(App.ruta+"Menu.txt",StandardCharsets.UTF_8))){
+        try(BufferedReader bf=new BufferedReader(new FileReader(App.rutaFile+"Menu.txt",StandardCharsets.UTF_8))){
         String linea= bf.readLine();
         while(linea!=null){
             String datos[]=linea.strip().split(",");
