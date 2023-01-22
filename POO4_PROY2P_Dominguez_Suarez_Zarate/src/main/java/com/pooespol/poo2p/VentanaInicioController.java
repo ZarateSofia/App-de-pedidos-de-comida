@@ -291,7 +291,6 @@ public class VentanaInicioController implements Initializable {
                             segundos.setStyle("-fx-font-weight: bold");    
                             aceptar.setStyle("-fx-font-weight: bold");
                             
-                            
                             Scene scene2=new Scene(popup,322,168);
                             Stage stage2=new Stage();
                             stage2.setScene(scene2);
@@ -320,14 +319,11 @@ public class VentanaInicioController implements Initializable {
                                             Thread.sleep(1000);
                                         } catch (InterruptedException ex) {
                                             ex.printStackTrace();
-                                        }
-                                        
-                                        
-                                    }
-                        
-                                   
+                                        }   
+                                    }              
                                 }
                             });
+                            
                             t2.setDaemon(true);
                             t2.start();
                              
@@ -335,8 +331,6 @@ public class VentanaInicioController implements Initializable {
                             popup.setStyle("-fx-background-color: orange");
                             popup.setSpacing(20);
                             popup.setPadding(new Insets(20, 20, 20, 20));
-                            
-                            
                             
                             aceptar.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
                                 @Override
@@ -347,7 +341,6 @@ public class VentanaInicioController implements Initializable {
                             });//clase anonima boton aceptar
                         }//handle para imgvubicacion
                     });//clase anonima imgvubicacion
-                    
 
                 }//for
             }// run 1
