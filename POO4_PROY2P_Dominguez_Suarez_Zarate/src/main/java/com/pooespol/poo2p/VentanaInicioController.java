@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -30,7 +31,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import modelo.Local;
 
@@ -213,6 +213,7 @@ public class VentanaInicioController implements Initializable {
         }catch(IOException e){
             System.out.println("Archivo no encontrado");            
         }
+        
         imgvmapa.setFitWidth(950);
         imgvmapa.setFitHeight(700);
         Button btnregresar=new Button();
@@ -273,11 +274,18 @@ public class VentanaInicioController implements Initializable {
                             Label segundos=new Label();
                             Button aceptar=new Button("Aceptar");
                             hbox.getChildren().addAll(segundos,aceptar);
-                            hbox.setSpacing(200);
-                            
+                            hbox.setSpacing(40);
+                            aceptar.setStyle("-fx-background-color: skyblue");
+                            nombreLocal.setStyle("-fx-font-weight: bold");
+                            horario.setStyle("-fx-font-weight: bold");
+                            direccion.setStyle("-fx-font-weight: bold");
+                            segundos.setStyle("-fx-font-weight: bold");    
+                            aceptar.setStyle("-fx-font-weight: bold");
+
                             popup.getChildren().addAll(nombreLocal,horario,direccion,hbox);
                             popup.setStyle("-fx-background-color: orange");
                             popup.setSpacing(20);
+                            popup.setPadding(new Insets(20, 20, 20, 20));
                             
                             Scene scene2=new Scene(popup,322,168);
                             Stage stage2=new Stage();

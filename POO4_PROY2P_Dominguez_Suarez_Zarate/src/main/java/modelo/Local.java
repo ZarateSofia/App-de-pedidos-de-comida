@@ -8,6 +8,8 @@ import com.pooespol.poo2p.App;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -73,7 +75,7 @@ public class Local {
     
     public static ArrayList<Local> cargarLocales(){
         ArrayList<Local> listaLocales=new ArrayList<>();
-        try(BufferedReader bf=new BufferedReader(new FileReader(App.rutaFile+"locales.txt"))){
+        try(BufferedReader bf=new BufferedReader(new FileReader(App.rutaFile+"locales.txt",StandardCharsets.UTF_8))){
             String linea= bf.readLine();
             while((linea=bf.readLine())!=null){
                 String datos[]=linea.strip().split(",");
