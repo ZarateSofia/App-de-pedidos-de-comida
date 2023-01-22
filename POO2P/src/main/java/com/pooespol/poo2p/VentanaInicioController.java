@@ -231,16 +231,6 @@ public class VentanaInicioController implements Initializable {
             }
         });
         
-        //llamando metodo para mostrar imagenes de ubicaciones
-//        cargarUbicaciones(paneroot);
-        
-//       imgvubicacion.setOnMouseClicked(new EventHandler<MouseEvent>(){
-//            @Override
-//            public void handle(MouseEvent event ){
-//                
-//            }
-//       });
-
         paneroot.getChildren().addAll(imgvmapa,btnregresar);
         Scene scene=new Scene(paneroot,950,650);
         Stage stage=new Stage();
@@ -275,20 +265,34 @@ public class VentanaInicioController implements Initializable {
                     imgvubicacion.setOnMouseClicked(new EventHandler<MouseEvent>(){
                         @Override
                         public void handle(MouseEvent event ){
-//                            Popup popup=new Popup();
-//                            Label nombreLocal=new Label(l.getNombre());
-//                            Label horario=new Label(l.getHorario());
-//                            Label direccion=new Label(l.getDireccion());
-//                            
-//                            popup.getContent().addAll(nombreLocal,horario,direccion);
-//                            
-//                            if(!popup.isShowing()){
-//                                popup.show(stage);
-//                            }else{
-//                                popup.hide();
-//                            }
-                        }
-                    });
+                            VBox popup=new VBox();
+                            HBox hbox=new HBox();
+                            Label nombreLocal=new Label(l.getNombre());
+                            Label horario=new Label(l.getHorario());
+                            Label direccion=new Label(l.getDireccion());
+                            Label segundos=new Label();
+                            Button aceptar=new Button("Aceptar");
+                            hbox.getChildren().addAll(segundos,aceptar);
+                            hbox.setSpacing(200);
+                            
+                            popup.getChildren().addAll(nombreLocal,horario,direccion,hbox);
+                            popup.setStyle("-fx-background-color: orange");
+                            popup.setSpacing(20);
+                            
+                            Scene scene2=new Scene(popup,322,168);
+                            Stage stage2=new Stage();
+                            stage2.setScene(scene2);
+                            stage2.show();
+                            
+                            aceptar.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+                                @Override
+                                public void handle(ActionEvent t) {
+                                    Stage stage = (Stage) aceptar.getScene().getWindow();
+                                    stage.close();
+                                }//handle para boton aceptar
+                            });//clase anonima boton aceptar
+                        }//handle para imgvubicacion
+                    });//clase anonima imgvubicacion
                     
                     try{
 //                        System.out.println(aleatorio);
@@ -296,7 +300,7 @@ public class VentanaInicioController implements Initializable {
 
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
-                    }//try para sleep
+                    }//try-catch para sleep
                 }//for
             }// run 1
         });
