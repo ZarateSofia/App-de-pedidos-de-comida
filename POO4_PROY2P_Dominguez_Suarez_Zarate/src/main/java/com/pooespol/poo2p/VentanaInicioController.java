@@ -225,19 +225,20 @@ public class VentanaInicioController implements Initializable {
         btnregresar.setLayoutY(608);
         btnregresar.setStyle("-fx-background-color:orange;");
         
-        btnregresar.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent t) {
-                CargarVentanaBienvenida();
-            }
-        });
-        
         paneroot.getChildren().addAll(imgvmapa,btnregresar);
         Scene scene=new Scene(paneroot,950,650);
         Stage stage=new Stage();
         stage.setScene(scene);
         stage.show();
         
+        btnregresar.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent t) {
+                stage.close();
+                CargarVentanaBienvenida();
+            }
+        });
+ 
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -263,6 +264,14 @@ public class VentanaInicioController implements Initializable {
                         }//metodo run de platform
                     });//run 2
                     
+                    try{
+                        System.out.println(aleatorio);
+                        Thread.sleep(aleatorio);
+
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }//try-catch para sleep
+                    
                     imgvubicacion.setOnMouseClicked(new EventHandler<MouseEvent>(){
                         @Override
                         public void handle(MouseEvent event ){
@@ -274,23 +283,60 @@ public class VentanaInicioController implements Initializable {
                             Label segundos=new Label();
                             Button aceptar=new Button("Aceptar");
                             hbox.getChildren().addAll(segundos,aceptar);
-                            hbox.setSpacing(40);
+                            hbox.setSpacing(80);
                             aceptar.setStyle("-fx-background-color: skyblue");
                             nombreLocal.setStyle("-fx-font-weight: bold");
                             horario.setStyle("-fx-font-weight: bold");
                             direccion.setStyle("-fx-font-weight: bold");
                             segundos.setStyle("-fx-font-weight: bold");    
                             aceptar.setStyle("-fx-font-weight: bold");
-
-                            popup.getChildren().addAll(nombreLocal,horario,direccion,hbox);
-                            popup.setStyle("-fx-background-color: orange");
-                            popup.setSpacing(20);
-                            popup.setPadding(new Insets(20, 20, 20, 20));
+                            
                             
                             Scene scene2=new Scene(popup,322,168);
                             Stage stage2=new Stage();
                             stage2.setScene(scene2);
                             stage2.show();
+                            
+                            Thread t2 = new Thread(new Runnable() {
+                                int i=6;
+                                
+                                @Override
+                                public void run() {
+                                    while(i>=0){
+                                        Platform.runLater(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                segundos.setText("Mostrando "+i+" segundos");
+                                                if(i==0){
+                                                    stage2.close();
+                                                }else{
+
+                                                }
+                                            }
+                                        });
+                                        i--;
+                                        
+                                        try {
+                                            Thread.sleep(1000);
+                                        } catch (InterruptedException ex) {
+                                            ex.printStackTrace();
+                                        }
+                                        
+                                        
+                                    }
+                        
+                                   
+                                }
+                            });
+                            t2.setDaemon(true);
+                            t2.start();
+                             
+                            popup.getChildren().addAll(nombreLocal,horario,direccion,hbox);
+                            popup.setStyle("-fx-background-color: orange");
+                            popup.setSpacing(20);
+                            popup.setPadding(new Insets(20, 20, 20, 20));
+                            
+                            
                             
                             aceptar.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
                                 @Override
@@ -302,13 +348,7 @@ public class VentanaInicioController implements Initializable {
                         }//handle para imgvubicacion
                     });//clase anonima imgvubicacion
                     
-                    try{
-//                        System.out.println(aleatorio);
-                        Thread.sleep(aleatorio);
 
-                    } catch (InterruptedException ex) {
-                        ex.printStackTrace();
-                    }//try-catch para sleep
                 }//for
             }// run 1
         });
