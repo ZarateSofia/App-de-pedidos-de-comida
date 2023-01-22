@@ -1,14 +1,14 @@
 ﻿Nombre,horario,dirección,coordenadaX,coordenadaY
-Local 1,9 am a 4 pm,San Felipe,64.85714285714286,171.14285714285714
-Local 2,10 am a 12 am,Marta de Roldos,101.71428571428571,281.14285714285717
-Local 3,3 pm a 2 am, Urdesa,208.0,420.2857142857143
-Local 4,6 am a 12 pm,Mall del sol,361.14285714285717,328.2857142857143
-Local 5,7 am a 4 pm,Garzota,416.0,281.7142857142857
-Local 6,2 pm a 7 pm,Urdenor,304.57142857142856,263.42857142857144
-Local 7,1 pm a 8 pm,Sauces 9,397.42857142857144,123.42857142857143
-Local 8,3 am a 5 am,Acuarela del Río,506.85714285714283,141.14285714285714
-Local 9,5 am a 6 pm,Parque Histórico,656.2857142857143,254.28571428571428
-Local 10,6 am a 7 pm,Los Álamos,213.71428571428572,140.57142857142858
-Local 11,4 am a 7 pm,Torres del Sol,650.2857142857143,40.57142857142857
-Local 12,5 am a 9 am,Sauces 4,506.2857142857143,43.42857142857143
-Local 13,5 am a 8 am,Cooperativa Pastor Vera,112.57142857142857,68.0
+Comidas de Pablo,9 am a 4 pm,San Felipe,64.85714285714286,171.14285714285714
+La cocina de la abuelita,10 am a 12 am,Marta de Roldos,101.71428571428571,281.14285714285717
+Mi querido,3 pm a 2 am,Urdesa,208.0,420.2857142857143
+El asadero de Juan,6 am a 12 pm,Mall del sol,361.14285714285717,328.2857142857143
+Parrilladas "El Abuelo",7 am a 4 pm,Garzota,416.0,281.7142857142857
+La Doña,2 pm a 7 pm,Urdenor,304.57142857142856,263.42857142857144
+Parriladas San José,1 pm a 8 pm,Sauces 9,397.42857142857144,123.42857142857143
+El rincón enchilado,3 am a 5 am,Acuarela del Río,506.85714285714283,141.14285714285714
+Torre de la pizza,5 am a 6 pm,Parque Histórico,656.2857142857143,254.28571428571428
+Antojo de burritos,6 am a 7 pm,Los Álamos,213.71428571428572,140.57142857142858
+La esquinita,4 am a 7 pm,Torres del Sol,650.2857142857143,40.57142857142857
+Como en Casa,5 am a 9 am,Sauces 4,506.2857142857143,43.42857142857143
+La olla criolla,5 am a 8 am,Cooperativa Pastor Vera,112.57142857142857,68.0

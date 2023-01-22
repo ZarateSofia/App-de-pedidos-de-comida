@@ -102,10 +102,7 @@ public class Cliente {
         return listaClientescl;
    
     }
-    
-    
-    
-    
+      
       public static String[] CargarClientes(){
         String[] listaClientes=new String[100];
         try(BufferedReader bf=new BufferedReader(new FileReader(App.rutaFile+"Clientes.txt"))){
