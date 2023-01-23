@@ -28,8 +28,6 @@ public class VentanaPedidoController implements Initializable {
         MostrarComidaPorTipo();
         Limpiar();
         switchToVentanaDireccion();
-
-
     }
     @FXML
     private ComboBox cbxOpcionesTipo;

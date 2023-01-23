@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -37,8 +36,8 @@ import modelo.Local;
 
 public class VentanaInicioController implements Initializable {
     public ArrayList<Cliente> listaClientes=Cliente.CargarClientesCl();
-    public String[] listaDatosClientes=Cliente.CargarClientes();
-    public Cliente cliente;
+//    public String[] listaDatosClientes=Cliente.CargarClientes();
+    static Cliente cliente;
     
     @FXML
     private VBox VBoxroot;
@@ -57,7 +56,7 @@ public class VentanaInicioController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        agregarEstiloVentanaInicio();        
+        agregarEstiloVentanaInicio();
     } 
 
 
@@ -80,14 +79,21 @@ public class VentanaInicioController implements Initializable {
     
     @FXML
     public void Ingresar(ActionEvent action) throws IOException {
-        if(ValidarUsuario()){ 
+        if(ValidarUsuario()==true){ 
             CargarVentanaBienvenida();
+        }else{
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("Error");
+            alerta.setContentText("Usuario o Contraseña incorrectos");
+            Optional<ButtonType> opciones = alerta.showAndWait();
+            txtUsuario.clear();
+            txtContraseña.clear();
         }
     }
     
     public void CargarVentanaBienvenida(){
-        
-        //Creación de la nueva ventana
+        //Creación de la nueva ventana 
+//        CargarCliente();
         HBox root=new HBox();
         root.setStyle("-fx-background-color: black");
         ImageView imgv=new ImageView();
@@ -109,7 +115,7 @@ public class VentanaInicioController implements Initializable {
         Label lbBienvenida=new Label();
         lbBienvenida.setPrefWidth(500);
         lbBienvenida.setPrefHeight(150);
-        lbBienvenida.setText("Bienvenid@"+" "+CargarNombre());
+        lbBienvenida.setText("Bienvenid@"+" "+cliente.getNombre());
         lbBienvenida.setTextFill(Color.ORANGE);
         lbBienvenida.setFont(new Font(40));
   
@@ -122,7 +128,6 @@ public class VentanaInicioController implements Initializable {
         lbMsg01.setTextFill(Color.WHITE);
         lbMsg01.setAlignment(Pos.CENTER);
         lbMsg01.setLayoutY(120);
-        
         
         
         Button btnBuscarLocal=new Button();
@@ -175,34 +180,48 @@ public class VentanaInicioController implements Initializable {
     public boolean ValidarUsuario() {
         String usuario = txtUsuario.getText();
         String contraseña = txtContraseña.getText();
-        String datos = usuario + " " + contraseña;
-        if (Arrays.asList(listaDatosClientes).contains(datos)) {
+//        String datos = usuario + " " + contraseña;
+//        if (Arrays.asList(listaDatosClientes).contains(datos)) {
+//
+//        } else {
+//            Alert alerta = new Alert(Alert.AlertType.ERROR);
+//            alerta.setTitle("Error");
+//            alerta.setContentText("Usuario o Contraseña incorrectos");
+//            Optional<ButtonType> opciones = alerta.showAndWait();
+//            txtUsuario.clear();
+//            txtContraseña.clear();
+//            return false;
+//        }
+//        return true;
 
-        } else {
-            Alert alerta = new Alert(Alert.AlertType.ERROR);
-            alerta.setTitle("Error");
-            alerta.setContentText("Usuario o Contraseña incorrectos");
-            Optional<ButtonType> opciones = alerta.showAndWait();
-            txtUsuario.clear();
-            txtContraseña.clear();
-            return false;
+        boolean validar=false;
+        for (Cliente c:listaClientes){
+            if(c.getUsuario().equals(usuario) && c.getContraseña().equals(contraseña)){
+                validar=true;
+                cliente=c;
+            }
         }
-        return true;
+        return validar;
+
+        
     }
     
-    public String CargarNombre() {
-        String nombre="";
-        String usuario = txtUsuario.getText();
-        String contraseña = txtContraseña.getText();
-        cliente = new Cliente(txtUsuario.getText(), txtContraseña.getText());
-        for (Cliente i : listaClientes) {
-            if (i.getUsuario().equals(usuario) && i.getContraseña().equals(contraseña)) {
-                cliente = i;
-                nombre=cliente.getNombre();
-                
-            }
-        }return nombre;
-    }
+    //comente este metodo porque me di cuenta
+    // que en el anterior podemos inicializar la variable cliente:))))
+    
+//    public  void CargarCliente() {
+////        String nombre="";
+//        String usuario = txtUsuario.getText();
+//        String contraseña = txtContraseña.getText();
+////        cliente = new Cliente(txtUsuario.getText(), txtContraseña.getText());
+//        for (Cliente i : listaClientes) {
+//            if (i.getUsuario().equals(usuario) && i.getContraseña().equals(contraseña)) {
+//                cliente = i;
+////                nombre=cliente.getNombre();
+//            }
+//        }
+////        return cliente;
+//    }
     
     public void MostrarMapa(){
         Pane paneroot=new Pane();
@@ -265,7 +284,6 @@ public class VentanaInicioController implements Initializable {
                     });//run 2
                     
                     try{
-                        System.out.println(aleatorio);
                         Thread.sleep(aleatorio);
 
                     } catch (InterruptedException ex) {

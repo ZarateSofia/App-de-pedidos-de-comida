@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="452.0" prefWidth="600.0" spacing="20.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pooespol.poo2p.VentanaDireccionController">
    <children>
       <Label text="Dirección de entrega" textFill="ORANGE">
          <font>
@@ -40,7 +40,7 @@
       <HBox alignment="CENTER" prefHeight="130.0" prefWidth="600.0" spacing="30.0">
          <children>
             <Button fx:id="btContinuar" mnemonicParsing="false" prefHeight="28.0" prefWidth="74.0" style="-fx-background-color: #fda10e;" text="Continuar" />
-            <Button fx:id="btLimpia" mnemonicParsing="false" prefHeight="28.0" prefWidth="74.0" style="-fx-background-color: #fda10e;" text="Limpiar" />
+            <Button fx:id="btLimpiar" mnemonicParsing="false" prefHeight="28.0" prefWidth="74.0" style="-fx-background-color: #fda10e;" text="Limpiar" />
          </children>
       </HBox>
    </children>
