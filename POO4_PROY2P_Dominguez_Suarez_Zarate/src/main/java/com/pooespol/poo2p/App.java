@@ -1,11 +1,13 @@
 package com.pooespol.poo2p;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import modelo.Comida;
 
 
 /**
@@ -16,6 +18,7 @@ public class App extends Application {
     public static Scene scene;
     public static String rutaImage ="src/main/resources/images/";
     public static String rutaFile ="src/main/resources/files/";
+    public static ArrayList<Comida> ListaComida=Comida.CargarMenu();
 
     @Override
     public void start(Stage stage) throws Exception {

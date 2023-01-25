@@ -13,9 +13,11 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -160,7 +162,21 @@ public class VentanaInicioController implements Initializable {
             @Override
             public void handle(ActionEvent t) {
                 try{
-                    App.setRoot("VentanaPedido");
+                    //App.setRoot("VentanaPedido");
+                    FXMLLoader fxmLoader=new FXMLLoader(App.class.getResource("VentanaPedido.fxml"));
+                    Parent root1=fxmLoader.load();
+                    Scene scene = new Scene(root1, 750, 500);
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.show();
+
+
+                    
+                    
+                    
+                    
+                    
+                    
                 }catch(IOException e){
                     System.out.println("Algo sucedió al tratar de cambiar a ventanaPedido");
                 }
@@ -174,7 +190,7 @@ public class VentanaInicioController implements Initializable {
 //        Stage stage=new Stage();
 //        stage.setScene(scene);
 //        stage.show(); 
-        App.scene.setRoot(root);
+          App.scene.setRoot(root);
     }
     
     public boolean ValidarUsuario() {
