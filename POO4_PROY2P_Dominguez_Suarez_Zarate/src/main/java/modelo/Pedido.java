@@ -20,6 +20,7 @@ public class Pedido implements Serializable{
     int cantidad;
     double precio;
 
+    
     public Pedido(String descripcion, int cantidad, double precio) {
         this.descripcion = descripcion;
         this.cantidad = cantidad;
