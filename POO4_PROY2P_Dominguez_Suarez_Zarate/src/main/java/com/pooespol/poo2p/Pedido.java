@@ -4,14 +4,24 @@
  */
 package com.pooespol.poo2p;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import modelo.Cliente;
+
 /**
  *
  * @author DELL
  */
-public class Pedido{
+public class Pedido implements Serializable{
+    
     String descripcion;
     String cantidad;
     double precio;
+    
+    ArrayList<Pedido> ListaP;
+    modelo.Cliente client;
+    String direccion;
+    double subtotal,iva,total;
 
     
     public Pedido(String descripcion, String cantidad, double precio) {
@@ -20,6 +30,16 @@ public class Pedido{
         this.precio = precio;
     }
 
+    public Pedido(ArrayList<Pedido> ListaP, Cliente client, String direccion, double subtotal, double iva, double total) {
+        this.ListaP = ListaP;
+        this.client = client;
+        this.direccion = direccion;
+        this.subtotal = subtotal;
+        this.iva = iva;
+        this.total = total;
+    }
+
+    
     public String getDescripcion() {
         return descripcion;
     }
@@ -43,6 +63,55 @@ public class Pedido{
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+
+    public ArrayList<Pedido> getListaP() {
+        return ListaP;
+    }
+
+    public void setListaP(ArrayList<Pedido> ListaP) {
+        this.ListaP = ListaP;
+    }
+
+    public Cliente getClient() {
+        return client;
+    }
+
+    public void setClient(Cliente client) {
+        this.client = client;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public double getIva() {
+        return iva;
+    }
+
+    public void setIva(double iva) {
+        this.iva = iva;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+    
     
    
 

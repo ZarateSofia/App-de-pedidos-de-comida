@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -39,7 +40,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import modelo.Cliente;
-import modelo.PedidoOrden;
+import modelo.ValorInsuficienteException;
 
 public class VentanaPedidoController implements Initializable {
 
@@ -180,17 +181,21 @@ public class VentanaPedidoController implements Initializable {
         lbDescripcion.setText("Descripcion");
         lbDescripcion.setStyle("-fx-font-weight: bold");
         lbDescripcion.setPadding(new Insets(5));
+        
         Label lbPrecio = new Label();
         lbPrecio.setText("Precio");
         lbPrecio.setStyle("-fx-font-weight: bold");
         lbPrecio.setPadding(new Insets(5));
+        
         Label lbCantidad = new Label();
         lbCantidad.setText("Cantidad");
         lbCantidad.setStyle("-fx-font-weight: bold");
         lbCantidad.setPadding(new Insets(5));
+        
         Label lbVacio = new Label();
         lbVacio.setText(" ");
         lbVacio.setPadding(new Insets(5));
+        
         vBD.getChildren().add(lbDescripcion);
         vBP.getChildren().add(lbPrecio);
         vBC.getChildren().add(lbCantidad);
@@ -217,21 +222,32 @@ public class VentanaPedidoController implements Initializable {
             //TRATANDO DE METER ELEMENTOS EN LA TABLA DE PEDIDO
             btnAgregar.addEventHandler(ActionEvent.ACTION, (ActionEvent t) -> {
                 try {
-                    double precioPorCantidad = k.getPrecio() * Integer.parseInt(cantidad.getText());
-                    cargarListaPedido(k.getDescripcion(), cantidad.getText(), precioPorCantidad);
-                    ListaPedido.add(new Pedido(k.getDescripcion(), cantidad.getText(), precioPorCantidad));
-                    Subtotal += precioPorCantidad;
-                    txtSubtotal.setText(String.valueOf(Subtotal));
-                    Iva = Subtotal * 0.12;
-                    txtIva.setText(String.valueOf(Iva));
-                    Total = Subtotal + Iva;
-                    txtTotal.setText(String.valueOf(Total));
+                    if((Integer.valueOf(cantidad.getText()))!=0){
+                        double precioPorCantidad = k.getPrecio() * Integer.parseInt(cantidad.getText());
+                        cargarListaPedido(k.getDescripcion(), cantidad.getText(), precioPorCantidad);
+                        ListaPedido.add(new Pedido(k.getDescripcion(), cantidad.getText(), precioPorCantidad));
+                        Subtotal += precioPorCantidad;
+                        txtSubtotal.setText(String.valueOf(Subtotal));
+                        Iva = Subtotal * 0.12;
+                        txtIva.setText(String.valueOf(Iva));
+                        Total = Subtotal + Iva;
+                        txtTotal.setText(String.valueOf(Total));
+                    }else{
+                        throw new ValorInsuficienteException("Ingrese una cantidad valida");
+                    }
+                    
                 } catch (RuntimeException e) {
                     Alert alerta = new Alert(Alert.AlertType.ERROR);
                     alerta.setTitle("Error");
                     alerta.setContentText("Cantidad Incorrecta. Escoja de nuevo");
                     Optional<ButtonType> opciones = alerta.showAndWait();
 
+                } catch (ValorInsuficienteException ex) {
+                    System.out.println(ex.getMessage());
+                    Alert alerta = new Alert(Alert.AlertType.ERROR);
+                    alerta.setTitle("ValorInsufiecienteException");
+                    alerta.setContentText(ex.getMessage());
+                    Optional<ButtonType> opciones2 = alerta.showAndWait();
                 }
 
             });//eventHandler
@@ -260,7 +276,7 @@ public class VentanaPedidoController implements Initializable {
     public void cambiarVentanaDireccion(ActionEvent event) {
         // Cuando se da continuar se escriben los archivos
         idPedido = (int) (Math.random() * 9999 + 1111);
-        PedidoOrden pO = new PedidoOrden(ListaPedido, cl, "null", Subtotal, Iva, Total);
+        Pedido pO = new Pedido(ListaPedido, cl, "null", Subtotal, Iva, Total);
         EscribirArchivoPedido(idPedido, cl.getNombre(), Total);
         EscribirArchivoPedidoSerialido(pO, idPedido);
 
@@ -360,7 +376,7 @@ public class VentanaPedidoController implements Initializable {
         continuar.setOnAction((ActionEvent t) -> {
             int idPago = (int) (Math.random() * 9999 + 1111);
             try ( BufferedWriter bfw = new BufferedWriter(new FileWriter("Pagos.txt", true))) {
-                bfw.write(idPago+","+idPedido+","+cl.getNombre()+","+Total+","+"28/01/23"+","+tipo);
+                bfw.write("\n"+idPago+","+idPedido+","+cl.getNombre()+","+Total+","+"29/01/23"+","+tipo);
 
             } catch (IOException ex) {
                 System.out.println("Error al escribir el archivo");
@@ -376,22 +392,16 @@ public class VentanaPedidoController implements Initializable {
 
     public void cargarListaPedido(String descripcion, String cantidad, double total) {
 
-//        ObservableList<Pedido> data =FXCollections.observableArrayList(new Pedido(descripcion,cantidad,total));
         TablaPedidos.setEditable(true);
 
-//        TableColumn PedidoDescripcion = new TableColumn("Descripcion");
         PedidoDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
 
-//        TableColumn PedidoCantidad = new TableColumn("Cantidad");
         PedidoCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
 
-//        TableColumn PedidoPrecio = new TableColumn("Precio");
         PedidoPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
 
-//        TablaPedidos.setItems(data);
         TablaPedidos.getItems().add(new Pedido(descripcion, cantidad, total));
 
-//        TablaPedidos.getColumns().addAll(PedidoDescripcion, PedidoCantidad,PedidoPrecio);
     }
 
     public void cargarVentanaFinal(int pedido) {
@@ -479,14 +489,14 @@ public class VentanaPedidoController implements Initializable {
 
     public void EscribirArchivoPedido(int idpedido, String nombreCliente, double total) {
         try ( BufferedWriter bfw = new BufferedWriter(new FileWriter("Pedidos.txt", true))) {
-            bfw.write(idpedido + "," + nombreCliente + "," + total);
+            bfw.write("\n"+idpedido + "," + nombreCliente + "," + total);
 
         } catch (IOException ex) {
             System.out.println("Error al escribir el archivo");
         }
     }
 
-    public void EscribirArchivoPedidoSerialido(PedidoOrden p, int idPedido) {
+    public void EscribirArchivoPedidoSerialido(Pedido p, int idPedido) {
         try ( ObjectOutputStream obj = new ObjectOutputStream(new FileOutputStream("pedido" + idPedido + ".bin"))) {
             obj.writeObject(p);
         } catch (IOException e) {
