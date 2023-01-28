@@ -9,6 +9,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -111,7 +113,7 @@ public class VentanaPedidoController implements Initializable {
                     }
                     break;
             }//fin switch
-            System.out.println(Lista);
+            //System.out.println(Lista);
             AgregarComidaPorTipo();
 //            Lista.clear();
 
@@ -128,12 +130,16 @@ public class VentanaPedidoController implements Initializable {
         vBB.getChildren().clear();
         Label lbDescripcion = new Label();
         lbDescripcion.setText("Descripcion");
+        lbDescripcion.setPadding(new Insets(5));
         Label lbPrecio = new Label();
         lbPrecio.setText("Precio");
+        lbPrecio.setPadding(new Insets(5));
         Label lbCantidad = new Label();
         lbCantidad.setText("Cantidad");
+        lbCantidad.setPadding(new Insets(5));
         Label lbVacio = new Label();
         lbCantidad.setText("");
+        lbVacio.setPadding(new Insets(5));
         vBD.getChildren().add(lbDescripcion);
         vBP.getChildren().add(lbPrecio);
         vBC.getChildren().add(lbCantidad);
@@ -142,27 +148,25 @@ public class VentanaPedidoController implements Initializable {
             Label contenedor = new Label();
             Label precio = new Label();
             TextField cantidad = new TextField();
+            cantidad.setPadding(new Insets(10));
             Button btnAgregar = new Button();
             contenedor.setText(k.getDescripcion());
+            contenedor.setPadding(new Insets(10));
+            //contenedor.setPrefWidth(15);
             precio.setText(String.valueOf(k.getPrecio()));
+            precio.setPadding(new Insets(10));
             btnAgregar.setText("Agregar");
+            btnAgregar.setPadding(new Insets(10));
             vBD.getChildren().add(contenedor);
             vBP.getChildren().add(precio);
             vBC.getChildren().add(cantidad);
             vBB.getChildren().add(btnAgregar);
 
             //TRATANDO DE METER ELEMENTOS EN LA TABLA DE PEDIDO
-//            btnAgregar.addEventHandler(ActionEvent.ACTION, (ActionEvent t) -> {
-//                if (cantidad.getText() != null) {
-//                    //TablaPedidos.getItems().addAll(k.getDescripcion(), cantidad.getText(), String.valueOf(k.getPrecio()));
-//                    System.out.println(k.getDescripcion());
-//                    PedidoDescripcion.getColumns().add(k.getDescripcion());
-//                    System.out.println(k.getDescripcion());
-//                    TablaPedidos.getColumns().add(PedidoDescripcion);
-//                } else {
-//
-//                }
-//            });
+            btnAgregar.addEventHandler(ActionEvent.ACTION, (ActionEvent t) -> {
+                System.out.println(cantidad.getText());
+
+            });//eventHandler
         }// for
         Lista.clear();
 
@@ -185,7 +189,6 @@ public class VentanaPedidoController implements Initializable {
         btnContinuar.addEventHandler(ActionEvent.ACTION, (ActionEvent t) -> {
             try {
                 App.setRoot("VentanaDireccion");
-                
 
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());
