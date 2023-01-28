@@ -7,8 +7,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -97,10 +95,10 @@ public class VentanaPedidoController implements Initializable {
     }
 
     public void CargarTipoComida() {
-        cbxOpcionesTipo.getItems().add("PIQUEO Q");
-        cbxOpcionesTipo.getItems().add("PLATO FUERTE F");
-        cbxOpcionesTipo.getItems().add("BEBIDA B");
-        cbxOpcionesTipo.getItems().add("POSTRE P");
+        cbxOpcionesTipo.getItems().add("PIQUEO");
+        cbxOpcionesTipo.getItems().add("PLATO FUERTE");
+        cbxOpcionesTipo.getItems().add("BEBIDA");
+        cbxOpcionesTipo.getItems().add("POSTRE");
     }
 
     public void MostrarComidaPorTipo() {
@@ -108,28 +106,28 @@ public class VentanaPedidoController implements Initializable {
             String OpcionEscogida = (String) cbxOpcionesTipo.getValue();
 
             switch (OpcionEscogida) {
-                case "PIQUEO Q":
+                case "PIQUEO":
                     for (Comida i : App.ListaComida) {
                         if (i.getTipo().equals("Q")) {
                             Lista.add(i);
                         }
                     }
                     break;
-                case "PLATO FUERTE F":
+                case "PLATO FUERTE":
                     for (Comida i : App.ListaComida) {
                         if (i.getTipo().equals("F")) {
                             Lista.add(i);
                         }
                     }
                     break;
-                case "BEBIDA B":
+                case "BEBIDA":
                     for (Comida i : App.ListaComida) {
                         if (i.getTipo().equals("B")) {
                             Lista.add(i);
                         }
                     }
                     break;
-                case "POSTRE P":
+                case "POSTRE":
                     for (Comida i : App.ListaComida) {
                         if (i.getTipo().equals("P")) {
                             Lista.add(i);
@@ -154,15 +152,18 @@ public class VentanaPedidoController implements Initializable {
         vBB.getChildren().clear();
         Label lbDescripcion = new Label();
         lbDescripcion.setText("Descripcion");
+        lbDescripcion.setStyle("-fx-font-weight: bold");
         lbDescripcion.setPadding(new Insets(5));
         Label lbPrecio = new Label();
         lbPrecio.setText("Precio");
+        lbPrecio.setStyle("-fx-font-weight: bold");
         lbPrecio.setPadding(new Insets(5));
         Label lbCantidad = new Label();
         lbCantidad.setText("Cantidad");
+        lbCantidad.setStyle("-fx-font-weight: bold");
         lbCantidad.setPadding(new Insets(5));
         Label lbVacio = new Label();
-        lbVacio.setText(" hghghy");
+        lbVacio.setText(" ");
         lbVacio.setPadding(new Insets(5));
         vBD.getChildren().add(lbDescripcion);
         vBP.getChildren().add(lbPrecio);
@@ -177,7 +178,7 @@ public class VentanaPedidoController implements Initializable {
             Button btnAgregar = new Button();
             contenedor.setText(k.getDescripcion());
             contenedor.setPadding(new Insets(10));
-            //contenedor.setPrefWidth(15);
+//            contenedor.setPrefWidth(15);
             precio.setText(String.valueOf(k.getPrecio()));
             precio.setPadding(new Insets(10));
             btnAgregar.setText("Agregar");

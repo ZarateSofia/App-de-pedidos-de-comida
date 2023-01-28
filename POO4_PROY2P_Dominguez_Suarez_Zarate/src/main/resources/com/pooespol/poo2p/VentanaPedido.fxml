@@ -86,7 +86,7 @@
             <Insets left="120.0" />
          </GridPane.margin>
       </Label>
-      <TableView fx:id="TablaPedidos" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <TableView fx:id="TablaPedidos" prefHeight="228.0" prefWidth="183.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
         <columns>
           <TableColumn fx:id="PedidoDescripcion" prefWidth="153.0" text="Descripción" />
           <TableColumn fx:id="PedidoCantidad" prefWidth="119.0" text="Cantidad" />
@@ -169,18 +169,18 @@
       </Button>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.rowIndex="3">
          <children>
-            <VBox fx:id="vBD" prefHeight="200.0" prefWidth="100.0">
+            <VBox fx:id="vBD" prefHeight="228.0" prefWidth="177.0">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
             </VBox>
-            <VBox fx:id="vBP" prefHeight="200.0" prefWidth="100.0">
+            <VBox fx:id="vBP" prefHeight="228.0" prefWidth="74.0">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
             </VBox>
-            <VBox fx:id="vBC" prefHeight="200.0" prefWidth="100.0" />
-            <VBox fx:id="vBB" prefHeight="200.0" prefWidth="100.0" />
+            <VBox fx:id="vBC" prefHeight="228.0" prefWidth="80.0" />
+            <VBox fx:id="vBB" prefHeight="228.0" prefWidth="102.0" />
          </children>
       </HBox>
    </children>

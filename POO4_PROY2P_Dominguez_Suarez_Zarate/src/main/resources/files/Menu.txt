@@ -1,23 +1,21 @@
-hamburguesa simple,5.00,F
-taco de pollo,4.50,F
-hot dog chilli,3.50,F
-tallarin de carne,6.00,F
-sudado de pescado,4.50,F
-tigrillo,3.00,F
-encebollado,1.50,F
-tiramisu,4.00,P
-helado vainilla,1.00,P
-tres leches,3.50,P
-banana split,4.00,P
-cheesecake maracuya,2.50,P
-coca cola 400 ml,2.00,B
-budweiser 300 ml,2.00,B
-club verde 500 ml,3.50,B
-sprite 1000l,2.50,B
-cania manaba 2000 ml, 12.00,B
-deditos de queso x5,3.00,Q
-nachos con queso,4.00,Q
-tequeños x4,3.00,Q
-empanadas x5,5.00,Q
-cupcakes x5,7.00,Q
+Hamburguesa simple,5.00,F
+Taco de pollo,4.50,F
+Hot dog chilli,3.50,F
+Tigrillo,3.00,F
+Encebollado,1.50,F
+Tiramisu,4.00,P
+Helado vainilla,1.00,P
+Tres leches,3.50,P
+Banana split,4.00,P
+Cheesecake maracuya,2.50,P
+Coca cola 400 ml,2.00,B
+Budweiser 300 ml,2.00,B
+Club verde 500 ml,3.50,B
+Sprite 1000l,2.50,B
+Cania manaba 2000 ml, 12.00,B
+Deditos de queso x5,3.00,Q
+Nachos con queso,4.00,Q
+Tequeños x4,3.00,Q
+Empanadas x5,5.00,Q
+Cupcakes x5,7.00,Q
 
