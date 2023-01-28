@@ -4,24 +4,17 @@
  */
 package com.pooespol.poo2p;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-
 /**
  *
  * @author DELL
  */
-public class Pedido implements Serializable{
+public class Pedido{
     String descripcion;
     String cantidad;
-    String precio;
+    double precio;
 
     
-    public Pedido(String descripcion, String cantidad, String precio) {
+    public Pedido(String descripcion, String cantidad, double precio) {
         this.descripcion = descripcion;
         this.cantidad = cantidad;
         this.precio = precio;
@@ -43,32 +36,23 @@ public class Pedido implements Serializable{
         this.cantidad = cantidad;
     }
 
-    public String getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(String precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
     
-    
-    
-    
-    public void EscribirArchivoPedido(int idpedido,String nombreCliente, double total){
-        try(BufferedWriter bfw=new BufferedWriter(new FileWriter("Pedidos.txt",true))){
-            bfw.write(idpedido+","+nombreCliente+","+total);
-            
-        }catch(IOException ex){
-            System.out.println("Error al escribir el archivo");
-        }      
+   
+
+    @Override
+    public String toString() {
+        return "Descripcion=" + descripcion + ", cantidad=" + cantidad + ", precio=" + precio;
     }
     
-    public void EscribirArchivoPedidoSerialido(Pedido p,int idPedido){
-        try(ObjectOutputStream obj=new ObjectOutputStream(new FileOutputStream("pedido"+idPedido+".bin"))){
-                obj.writeObject(p);          
-        }catch(IOException e){
-            System.out.println("Ocurrio un error durante la serializacion"+e);
-        }   
-    }
+    
+    
+    
     
 }

@@ -334,6 +334,11 @@ public class VentanaInicioController implements Initializable {
         
         t.setDaemon(true);
         t.start();
-   
-    }      
+        
+    }  
+
+
+    public static Cliente devolverCliente(){
+        return cliente;
+    }
 }
