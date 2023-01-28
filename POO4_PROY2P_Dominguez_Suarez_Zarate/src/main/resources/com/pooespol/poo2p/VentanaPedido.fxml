@@ -151,7 +151,7 @@
             </HBox>
          </children>
       </VBox>
-      <Button fx:id="btnContinuar" mnemonicParsing="false" style="-fx-background-color: orange;" text="Continuar" GridPane.rowIndex="5">
+      <Button fx:id="btnContinuar" mnemonicParsing="false" onAction="#cambiarVentanaDireccion" style="-fx-background-color: orange;" text="Continuar" GridPane.rowIndex="5">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

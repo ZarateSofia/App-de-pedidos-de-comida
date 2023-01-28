@@ -170,13 +170,6 @@ public class VentanaInicioController implements Initializable {
                     stage.setScene(scene);
                     stage.show();
 
-
-                    
-                    
-                    
-                    
-                    
-                    
                 }catch(IOException e){
                     System.out.println("Algo sucedió al tratar de cambiar a ventanaPedido");
                 }
@@ -190,7 +183,7 @@ public class VentanaInicioController implements Initializable {
 //        Stage stage=new Stage();
 //        stage.setScene(scene);
 //        stage.show(); 
-          App.scene.setRoot(root);
+        App.scene.setRoot(root);
     }
     
     public boolean ValidarUsuario() {
@@ -290,6 +283,14 @@ public class VentanaInicioController implements Initializable {
                         System.out.println("Archivo no encontrado"); 
                     }//try para poner imagen  
 
+                    try{
+                        Thread.sleep(aleatorio);
+                        System.out.println(aleatorio);
+
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }//try-catch para sleep
+                    
                     Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
@@ -298,13 +299,6 @@ public class VentanaInicioController implements Initializable {
                             paneroot.getChildren().add(imgvubicacion);
                         }//metodo run de platform
                     });//run 2
-                    
-                    try{
-                        Thread.sleep(aleatorio);
-
-                    } catch (InterruptedException ex) {
-                        ex.printStackTrace();
-                    }//try-catch para sleep
                     
                     imgvubicacion.setOnMouseClicked(new EventHandler<MouseEvent>(){
                         @Override
@@ -324,15 +318,15 @@ public class VentanaInicioController implements Initializable {
                             direccion.setStyle("-fx-font-weight: bold");
                             segundos.setStyle("-fx-font-weight: bold");    
                             aceptar.setStyle("-fx-font-weight: bold");
-                            
+
                             Scene scene2=new Scene(popup,322,168);
                             Stage stage2=new Stage();
                             stage2.setScene(scene2);
                             stage2.show();
-                            
+
                             Thread t2 = new Thread(new Runnable() {
                                 int i=6;
-                                
+
                                 @Override
                                 public void run() {
                                     while(i>=0){
@@ -345,10 +339,10 @@ public class VentanaInicioController implements Initializable {
                                                 }else{
 
                                                 }
-                                            }
+                                            }                
                                         });
                                         i--;
-                                        
+
                                         try {
                                             Thread.sleep(1000);
                                         } catch (InterruptedException ex) {
@@ -357,15 +351,15 @@ public class VentanaInicioController implements Initializable {
                                     }              
                                 }
                             });
-                            
+
                             t2.setDaemon(true);
                             t2.start();
-                             
+
                             popup.getChildren().addAll(nombreLocal,horario,direccion,hbox);
                             popup.setStyle("-fx-background-color: orange");
                             popup.setSpacing(20);
                             popup.setPadding(new Insets(20, 20, 20, 20));
-                            
+
                             aceptar.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
                                 @Override
                                 public void handle(ActionEvent t) {
@@ -375,7 +369,7 @@ public class VentanaInicioController implements Initializable {
                             });//clase anonima boton aceptar
                         }//handle para imgvubicacion
                     });//clase anonima imgvubicacion
-
+            
                 }//for
             }// run 1
         });
