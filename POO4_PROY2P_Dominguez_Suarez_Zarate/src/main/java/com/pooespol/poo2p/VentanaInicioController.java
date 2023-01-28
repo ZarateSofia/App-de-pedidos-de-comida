@@ -51,10 +51,6 @@ public class VentanaInicioController implements Initializable {
     private ImageView imgvFotoRepartidor;
     @FXML
     private ImageView imgvFotoHamburguesa;
-    @FXML
-    private Button btnIngresar;
-    @FXML
-    private HBox seccionAbajo;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -178,31 +174,12 @@ public class VentanaInicioController implements Initializable {
 
         VBoxDerecha.getChildren().addAll(lbBienvenida,lbMsg01,btnBuscarLocal,btnHacerPedido);
         root.getChildren().addAll(imgv,VBoxDerecha);
-//        Scene scene=new Scene(root,750,500);
-//        App.scene=new Scene(root,750,500);
-//        Stage stage=new Stage();
-//        stage.setScene(scene);
-//        stage.show(); 
         App.scene.setRoot(root);
     }
     
     public boolean ValidarUsuario() {
         String usuario = txtUsuario.getText();
         String contraseña = txtContraseña.getText();
-//        String datos = usuario + " " + contraseña;
-//        if (Arrays.asList(listaDatosClientes).contains(datos)) {
-//
-//        } else {
-//            Alert alerta = new Alert(Alert.AlertType.ERROR);
-//            alerta.setTitle("Error");
-//            alerta.setContentText("Usuario o Contraseña incorrectos");
-//            Optional<ButtonType> opciones = alerta.showAndWait();
-//            txtUsuario.clear();
-//            txtContraseña.clear();
-//            return false;
-//        }
-//        return true;
-
         boolean validar=false;
         for (Cliente c:listaClientes){
             if(c.getUsuario().equals(usuario) && c.getContraseña().equals(contraseña)){
@@ -210,27 +187,8 @@ public class VentanaInicioController implements Initializable {
                 cliente=c;
             }
         }
-        return validar;
-
-        
+        return validar;  
     }
-    
-    //comente este metodo porque me di cuenta
-    // que en el anterior podemos inicializar la variable cliente:))))
-    
-//    public  void CargarCliente() {
-////        String nombre="";
-//        String usuario = txtUsuario.getText();
-//        String contraseña = txtContraseña.getText();
-////        cliente = new Cliente(txtUsuario.getText(), txtContraseña.getText());
-//        for (Cliente i : listaClientes) {
-//            if (i.getUsuario().equals(usuario) && i.getContraseña().equals(contraseña)) {
-//                cliente = i;
-////                nombre=cliente.getNombre();
-//            }
-//        }
-////        return cliente;
-//    }
     
     public void MostrarMapa(){
         Pane paneroot=new Pane();
@@ -377,15 +335,5 @@ public class VentanaInicioController implements Initializable {
         t.setDaemon(true);
         t.start();
    
-    } //INCOMPLETO
-  
-    
-        
+    }      
 }
-
-
-
-
-
-
-

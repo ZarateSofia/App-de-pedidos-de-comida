@@ -1,13 +1,16 @@
 package com.pooespol.poo2p;
 
+import java.io.FileInputStream;
 import modelo.Comida;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -20,9 +23,14 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import modelo.Pedido;
 
@@ -68,16 +76,18 @@ public class VentanaPedidoController implements Initializable {
 
     @FXML
     private VBox vBB;
+//    
+//    @FXML
+//    private TableColumn<Pedido,String> PedidoDescripcion;
+//    
+//    @FXML
+//    private TableColumn<Pedido,Integer> PedidoCantidad;
+//    
+//    @FXML
+//    private TableColumn<Pedido,Double> PedidoPrecio;
     
-    @FXML
-    private TableColumn<Pedido,String> PedidoDescripcion;
-    
-    @FXML
-    private TableColumn<Pedido,Integer> PedidoCantidad;
-    
-    @FXML
-    private TableColumn<Pedido,Double> PedidoPrecio;
-    
+    ObservableList<Pedido> data =FXCollections.observableArrayList(new Pedido("A", 3,9.0));
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -159,6 +169,15 @@ public class VentanaPedidoController implements Initializable {
         vBP.getChildren().add(lbPrecio);
         vBC.getChildren().add(lbCantidad);
         vBB.getChildren().add(lbVacio);
+        
+        
+        
+//        PedidoDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+//        PedidoCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
+//        PedidoPrecio.setCellValueFactory(new PropertyValueFactory<>("valor"));
+//        
+//        
+        
         for (Comida k : Lista) {
             Label contenedor = new Label();
             Label precio = new Label();
@@ -184,7 +203,7 @@ public class VentanaPedidoController implements Initializable {
 
             //TRATANDO DE METER ELEMENTOS EN LA TABLA DE PEDIDO
             btnAgregar.addEventHandler(ActionEvent.ACTION, (ActionEvent t) -> {
-                cargarListaPedido("holaaaaaaa",2,4353);
+                cargarListaPedido();
 
             });//eventHandler
         }// for
@@ -258,17 +277,121 @@ public class VentanaPedidoController implements Initializable {
         root2.setPadding(new Insets(20,20,20,20));
         root2.setSpacing(20);
         
-        
-        
+        continuar.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent t) {
+                
+                Stage stage3=(Stage)continuar.getScene().getWindow();
+                stage3.close();
+                
+                cargarVentanaFinal(2);
+            }
+            
+            
+            
+        });
 
     }
 
     
-    public void cargarListaPedido(String descripcion, int cantidad,double valor){
-////        lista=FXCollections.observableArrayList(
-//        new Pedido(descripcion,cantidad,valor));
-//        TablaPedidos.getItems().add(new Pedido(descripcion,cantidad,valor));
-//        TablaPedidos.setEditable(true);
+    public void cargarListaPedido(){
+
+        TablaPedidos.setEditable(true);
+        
+        TableColumn PedidoDescripcion = new TableColumn("Descripcion");
+        PedidoDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        
+        TableColumn PedidoCantidad = new TableColumn("Cantidad");
+        PedidoCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
+        
+        TableColumn PedidoPrecio = new TableColumn("Precio");
+        PedidoPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
+ 
+        TablaPedidos.setItems(data);
+   
+        TablaPedidos.getColumns().addAll(PedidoDescripcion, PedidoCantidad,PedidoPrecio);
     }
     
+    
+    public void cargarVentanaFinal(int pedido){
+        VBox rootFinal=new VBox();
+        rootFinal.setAlignment(Pos.CENTER);
+        rootFinal.setStyle("-fx-background-color: white");
+        
+        Label lblAgradecimiento=new Label();
+        lblAgradecimiento.setText("¡Muchas Gracias!");
+        lblAgradecimiento.setPadding(new Insets(30));
+        lblAgradecimiento.setAlignment(Pos.CENTER);
+        lblAgradecimiento.setPadding(new Insets(80,0,15,30));
+        lblAgradecimiento.setTextFill(Color.ORANGE);
+        lblAgradecimiento.setFont(new Font(30));
+        
+        Label lbpedido=new Label();
+        lbpedido.setText("Su pedido Nro "+pedido+" ha sido pagado y ahora empezaremos a prepararlo");
+        lbpedido.setAlignment(Pos.CENTER);
+        lbpedido.setPadding(new Insets(0,0,10,70));
+        lbpedido.setFont(new Font(15));
+        
+        Label lbtiempo=new Label();
+        lbtiempo.setText("En aproximadamente 30 minutos llegará a su destino");
+        lbtiempo.setAlignment(Pos.CENTER);
+        lbtiempo.setPadding(new Insets(0,35,0,20));
+        lbtiempo.setFont(new Font(15));
+        
+        Label msgfinal=new Label();
+        msgfinal.setText("Gracias por preferirnos");
+        msgfinal.setAlignment(Pos.CENTER);
+        msgfinal.setPadding(new Insets(10,35,0,20));
+        msgfinal.setFont(new Font(15));
+        
+        ImageView imgv=new ImageView();
+        try(FileInputStream input=new FileInputStream(App.rutaImage+"FotoRepartidor2.jpeg")){
+            Image image=new Image(input,250,250,false,false);
+            imgv.setImage(image);
+        }catch(IOException e){
+            System.out.println("Archivo no encontrado");            
+        }
+        
+        Label lbcerrando=new Label();
+        lbcerrando.setText("Cerrando en 3....."); 
+        lbcerrando.setAlignment(Pos.BOTTOM_RIGHT);
+        
+        rootFinal.getChildren().addAll(lblAgradecimiento,lbpedido,lbtiempo,msgfinal,imgv,lbcerrando);
+        
+        Stage escenario=new Stage();
+        Scene escena=new Scene(rootFinal,600,550);
+        escenario.setScene(escena);
+        escenario.show();
+        
+        Thread t=new Thread(new Runnable(){
+            int i=6;
+            @Override
+            public void run() {
+                while(i>=0){
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            lbcerrando.setText("Cerrando en "+i);
+                            if(i==0){
+                                escenario.close();
+                            }else{
+
+                            }
+                        }                
+                    });
+                    i--;
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }   
+                }               
+            }   
+        });
+        
+        t.setDaemon(true);
+        t.start();
+        
+    }
 }//clase

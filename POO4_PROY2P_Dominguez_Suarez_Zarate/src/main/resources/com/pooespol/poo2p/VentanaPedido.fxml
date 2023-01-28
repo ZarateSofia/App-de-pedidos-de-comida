@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -86,13 +85,7 @@
             <Insets left="120.0" />
          </GridPane.margin>
       </Label>
-      <TableView fx:id="TablaPedidos" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-        <columns>
-          <TableColumn fx:id="PedidoDescripcion" prefWidth="153.0" text="Descripción" />
-          <TableColumn fx:id="PedidoCantidad" prefWidth="119.0" text="Cantidad" />
-            <TableColumn fx:id="PedidoPrecio" prefWidth="127.0" text="Precio" />
-        </columns>
-      </TableView>
+      <TableView fx:id="TablaPedidos" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <children>
             <HBox prefHeight="40.0" prefWidth="300.0">
