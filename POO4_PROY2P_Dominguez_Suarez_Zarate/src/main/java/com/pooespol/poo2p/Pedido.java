@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package modelo;
+package com.pooespol.poo2p;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -17,11 +17,11 @@ import java.io.Serializable;
  */
 public class Pedido implements Serializable{
     String descripcion;
-    int cantidad;
-    double precio;
+    String cantidad;
+    String precio;
 
     
-    public Pedido(String descripcion, int cantidad, double precio) {
+    public Pedido(String descripcion, String cantidad, String precio) {
         this.descripcion = descripcion;
         this.cantidad = cantidad;
         this.precio = precio;
@@ -35,19 +35,19 @@ public class Pedido implements Serializable{
         this.descripcion = descripcion;
     }
 
-    public int getCantidad() {
+    public String getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(String cantidad) {
         this.cantidad = cantidad;
     }
 
-    public double getPrecio() {
+    public String getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(String precio) {
         this.precio = precio;
     }
     

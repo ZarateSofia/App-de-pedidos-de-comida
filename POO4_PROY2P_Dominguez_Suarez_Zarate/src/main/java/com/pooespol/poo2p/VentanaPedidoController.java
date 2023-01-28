@@ -32,7 +32,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import modelo.Pedido;
 
 public class VentanaPedidoController implements Initializable {
 
@@ -76,17 +75,17 @@ public class VentanaPedidoController implements Initializable {
 
     @FXML
     private VBox vBB;
-//    
-//    @FXML
-//    private TableColumn<Pedido,String> PedidoDescripcion;
-//    
-//    @FXML
-//    private TableColumn<Pedido,Integer> PedidoCantidad;
-//    
-//    @FXML
-//    private TableColumn<Pedido,Double> PedidoPrecio;
     
-    ObservableList<Pedido> data =FXCollections.observableArrayList(new Pedido("A", 3,9.0));
+    @FXML
+    private TableColumn<Pedido,String> PedidoDescripcion;
+    
+    @FXML
+    private TableColumn<Pedido,String> PedidoCantidad;
+    
+    @FXML
+    private TableColumn<Pedido,String> PedidoPrecio;
+    
+//    ObservableList<Pedido> data =FXCollections.observableArrayList(new Pedido("A", 3,9.0),new Pedido("B",2,5.6));
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -170,14 +169,6 @@ public class VentanaPedidoController implements Initializable {
         vBC.getChildren().add(lbCantidad);
         vBB.getChildren().add(lbVacio);
         
-        
-        
-//        PedidoDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-//        PedidoCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
-//        PedidoPrecio.setCellValueFactory(new PropertyValueFactory<>("valor"));
-//        
-//        
-        
         for (Comida k : Lista) {
             Label contenedor = new Label();
             Label precio = new Label();
@@ -191,21 +182,20 @@ public class VentanaPedidoController implements Initializable {
             precio.setPadding(new Insets(10));
             btnAgregar.setText("Agregar");
             btnAgregar.setPadding(new Insets(10));
+            
+//            double subtotal=k.getPrecio()*Integer.valueOf(cantidad.getText());
+            
             vBD.getChildren().add(contenedor);
             vBP.getChildren().add(precio);
             vBC.getChildren().add(cantidad);
-            vBB.getChildren().add(btnAgregar);
-            
-//            String texto=cantidad.getText();
-//            int cantidad2=Integer.valueOf(texto);
-//            System.out.println(cantidad2.getClass());
-//            double subtotal=k.getPrecio();
 
             //TRATANDO DE METER ELEMENTOS EN LA TABLA DE PEDIDO
             btnAgregar.addEventHandler(ActionEvent.ACTION, (ActionEvent t) -> {
-                cargarListaPedido();
+                cargarListaPedido(k.getDescripcion(),cantidad.getText(),"odio");
 
             });//eventHandler
+            
+            vBB.getChildren().add(btnAgregar);
         }// for
         Lista.clear();
 
@@ -294,22 +284,25 @@ public class VentanaPedidoController implements Initializable {
     }
 
     
-    public void cargarListaPedido(){
+    public void cargarListaPedido(String descripcion,String cantidad,String total){
+        
+//        ObservableList<Pedido> data =FXCollections.observableArrayList(new Pedido(descripcion,cantidad,total));
 
         TablaPedidos.setEditable(true);
         
-        TableColumn PedidoDescripcion = new TableColumn("Descripcion");
+//        TableColumn PedidoDescripcion = new TableColumn("Descripcion");
         PedidoDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         
-        TableColumn PedidoCantidad = new TableColumn("Cantidad");
+//        TableColumn PedidoCantidad = new TableColumn("Cantidad");
         PedidoCantidad.setCellValueFactory(new PropertyValueFactory<>("cantidad"));
         
-        TableColumn PedidoPrecio = new TableColumn("Precio");
+//        TableColumn PedidoPrecio = new TableColumn("Precio");
         PedidoPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
  
-        TablaPedidos.setItems(data);
+//        TablaPedidos.setItems(data);
+        TablaPedidos.getItems().add(new Pedido(descripcion,cantidad,total));
    
-        TablaPedidos.getColumns().addAll(PedidoDescripcion, PedidoCantidad,PedidoPrecio);
+//        TablaPedidos.getColumns().addAll(PedidoDescripcion, PedidoCantidad,PedidoPrecio);
     }
     
     
