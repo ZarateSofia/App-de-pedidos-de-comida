@@ -193,36 +193,36 @@ public class VentanaInicioController implements Initializable {
         Pane paneroot=new Pane();
         ImageView imgvmapa=new ImageView();
         try(FileInputStream input=new FileInputStream(App.rutaImage+"Mapa2.png")){
-            Image image=new Image(input,1000,1000,false,false);
+            Image image=new Image(input,730,470,false,false);
             imgvmapa.setImage(image);
         }catch(IOException e){
             System.out.println("Archivo no encontrado");            
         }
         
-        imgvmapa.setFitWidth(950);
-        imgvmapa.setFitHeight(700);
-        Button btnregresar=new Button();
-        btnregresar.setPrefWidth(100);
-        btnregresar.setPrefHeight(40);
-        btnregresar.setAlignment(Pos.CENTER);
-        btnregresar.setText("Regresar");
-        btnregresar.setLayoutX(850);
-        btnregresar.setLayoutY(608);
-        btnregresar.setStyle("-fx-background-color:orange;");
+//        imgvmapa.setFitWidth(850);
+//        imgvmapa.setFitHeight(440);
+//        Button btnregresar=new Button();
+//        btnregresar.setPrefWidth(100);
+//        btnregresar.setPrefHeight(40);
+//        btnregresar.setAlignment(Pos.CENTER);
+//        btnregresar.setText("Regresar");
+//        btnregresar.setLayoutX(850);
+//        btnregresar.setLayoutY(608);
+//        btnregresar.setStyle("-fx-background-color:orange;");
         
-        paneroot.getChildren().addAll(imgvmapa,btnregresar);
-        Scene scene=new Scene(paneroot,950,650);
+        paneroot.getChildren().addAll(imgvmapa);
+        Scene scene=new Scene(paneroot,730,470);
         Stage stage=new Stage();
         stage.setScene(scene);
         stage.show();
         
-        btnregresar.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent t) {
-                stage.close();
-                CargarVentanaBienvenida();
-            }
-        });
+//        btnregresar.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent t) {
+//                stage.close();
+//                CargarVentanaBienvenida();
+//            }
+//        });
  
         Thread t = new Thread(new Runnable() {
             @Override
@@ -270,11 +270,11 @@ public class VentanaInicioController implements Initializable {
                             hbox.getChildren().addAll(segundos,aceptar);
                             hbox.setSpacing(80);
                             aceptar.setStyle("-fx-background-color: skyblue");
-                            nombreLocal.setStyle("-fx-font-weight: bold");
-                            horario.setStyle("-fx-font-weight: bold");
-                            direccion.setStyle("-fx-font-weight: bold");
-                            segundos.setStyle("-fx-font-weight: bold");    
-                            aceptar.setStyle("-fx-font-weight: bold");
+                            nombreLocal.setStyle("-fx-font-weight: bold; -fx-text-fill: black");
+                            horario.setStyle("-fx-font-weight: bold; -fx-text-fill: black");
+                            direccion.setStyle("-fx-font-weight: bold; -fx-text-fill: black");
+                            segundos.setStyle("-fx-font-weight: bold; -fx-text-fill: black");    
+                            aceptar.setStyle("-fx-font-weight: bold; -fx-text-fill: black");
 
                             Scene scene2=new Scene(popup,322,168);
                             Stage stage2=new Stage();

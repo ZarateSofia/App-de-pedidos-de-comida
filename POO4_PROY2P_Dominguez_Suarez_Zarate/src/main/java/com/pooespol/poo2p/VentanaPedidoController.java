@@ -395,9 +395,17 @@ public class VentanaPedidoController implements Initializable {
             continuar.setOnAction((ActionEvent t) -> {
                 if((!efectivo.isSelected() | !tarjeta.isSelected()) && direccion2.getText().isEmpty()){
                     Optional<ButtonType> opciones = alerta.showAndWait();
+                    
                 }else if(tarjeta.isSelected() && (txtTitular.getText().isEmpty() | txtnumero.getText().isEmpty() |
                     txtCaducidad.getText().isEmpty() | txtCVV.getText().isEmpty())){
                     Optional<ButtonType> opciones = alerta.showAndWait();
+                    
+//                }else if(!(cl.getTarjetaCredito().equals(txtnumero.getText()))){
+//                    Alert alerta2 = new Alert(Alert.AlertType.ERROR);
+//                    alerta2.setTitle("Error");
+//                    alerta2.setContentText("Tarjeta de credito incorrecta");
+//                    Optional<ButtonType> opciones = alerta2.showAndWait();
+//                    
                 }else{
                     int idPago = (int) (Math.random() * 9999 + 1111);
                     try ( BufferedWriter bfw = new BufferedWriter(new FileWriter("Pagos.txt", true))) {
@@ -454,33 +462,33 @@ public class VentanaPedidoController implements Initializable {
         VBox rootFinal = new VBox();
         rootFinal.setAlignment(Pos.CENTER);
         rootFinal.setStyle("-fx-background-color: white");
+        rootFinal.setSpacing(20);
 
         Label lblAgradecimiento = new Label();
         lblAgradecimiento.setText("¡Muchas Gracias!");
-        lblAgradecimiento.setPadding(new Insets(30));
-        lblAgradecimiento.setAlignment(Pos.CENTER);
-        lblAgradecimiento.setPadding(new Insets(80, 0, 15, 30));
         lblAgradecimiento.setTextFill(Color.ORANGE);
-        lblAgradecimiento.setFont(new Font(30));
-
+        lblAgradecimiento.setStyle("-fx-font-weight: bold; -fx-text-fill: orange; -fx-font-size:30");
+        
+        
+        VBox texto=new VBox();
+        texto.setSpacing(5);
+        texto.setAlignment(Pos.CENTER);
+        
         Label lbpedido = new Label();
         lbpedido.setText("Su pedido Nro " + pedido + " ha sido pagado y ahora empezaremos a prepararlo");
-        lbpedido.setAlignment(Pos.CENTER);
-        lbpedido.setPadding(new Insets(0, 0, 10, 70));
         lbpedido.setFont(new Font(15));
 
+        
         Label lbtiempo = new Label();
         lbtiempo.setText("En aproximadamente 30 minutos llegará a su destino");
-        lbtiempo.setAlignment(Pos.CENTER);
-        lbtiempo.setPadding(new Insets(0, 35, 0, 20));
         lbtiempo.setFont(new Font(15));
 
         Label msgfinal = new Label();
         msgfinal.setText("Gracias por preferirnos");
-        msgfinal.setAlignment(Pos.CENTER);
-        msgfinal.setPadding(new Insets(10, 35, 0, 20));
         msgfinal.setFont(new Font(15));
 
+        texto.getChildren().addAll(lbpedido,lbtiempo,msgfinal);
+        
         ImageView imgv = new ImageView();
         try ( FileInputStream input = new FileInputStream(App.rutaImage + "FotoRepartidor2.jpeg")) {
             Image image = new Image(input, 250, 250, false, false);
@@ -488,15 +496,18 @@ public class VentanaPedidoController implements Initializable {
         } catch (IOException e) {
             System.out.println("Archivo no encontrado");
         }
-
+        
+        VBox segundos2=new VBox();
         Label lbcerrando = new Label();
         lbcerrando.setText("Cerrando en 3.....");
-        lbcerrando.setAlignment(Pos.BOTTOM_RIGHT);
-
-        rootFinal.getChildren().addAll(lblAgradecimiento, lbpedido, lbtiempo, msgfinal, imgv, lbcerrando);
+        lbcerrando.setPadding(new Insets(0, 35, 0, 20));
+        segundos2.setAlignment(Pos.BOTTOM_RIGHT);
+        segundos2.getChildren().add(lbcerrando);
+        
+        rootFinal.getChildren().addAll(lblAgradecimiento,texto, imgv, segundos2);
 
         Stage escenario = new Stage();
-        Scene escena = new Scene(rootFinal, 600, 550);
+        Scene escena = new Scene(rootFinal, 600, 500);
         escenario.setScene(escena);
         escenario.show();
 
