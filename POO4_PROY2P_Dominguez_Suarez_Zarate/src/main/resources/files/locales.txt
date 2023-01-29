@@ -1,7 +1,7 @@
 ﻿Nombre,horario,dirección,coordenadaX,coordenadaY
 Comidas de Pablo,9 am a 4 pm,San Felipe,64.85714285714286,171.14285714285714
 La cocina de la abuelita,10 am a 12 am,Marta de Roldos,101.71428571428571,281.14285714285717
-Mi querido,3 pm a 2 am,Urdesa,208.0,420.2857142857143
+Mi querido,3 pm a 2 am,Urdesa,208.0,450.2857142857143
 El asadero de Juan,6 am a 12 pm,Mall del sol,361.14285714285717,328.2857142857143
 Parrilladas "El Abuelo",7 am a 4 pm,Garzota,416.0,281.7142857142857
 La Doña,2 pm a 7 pm,Urdenor,304.57142857142856,263.42857142857144

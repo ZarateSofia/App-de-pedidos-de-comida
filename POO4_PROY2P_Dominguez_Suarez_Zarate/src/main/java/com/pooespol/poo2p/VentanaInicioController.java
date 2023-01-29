@@ -191,16 +191,18 @@ public class VentanaInicioController implements Initializable {
     
     public void MostrarMapa(){
         Pane paneroot=new Pane();
+        paneroot.setPrefWidth(690);
+        paneroot.setPrefHeight(510);
         ImageView imgvmapa=new ImageView();
         try(FileInputStream input=new FileInputStream(App.rutaImage+"Mapa2.png")){
-            Image image=new Image(input,730,470,false,false);
+            Image image=new Image(input,690,510,false,false);
             imgvmapa.setImage(image);
         }catch(IOException e){
             System.out.println("Archivo no encontrado");            
         }
         
-//        imgvmapa.setFitWidth(850);
-//        imgvmapa.setFitHeight(440);
+        imgvmapa.setFitWidth(690);
+        imgvmapa.setFitHeight(510);
 //        Button btnregresar=new Button();
 //        btnregresar.setPrefWidth(100);
 //        btnregresar.setPrefHeight(40);
@@ -211,7 +213,7 @@ public class VentanaInicioController implements Initializable {
 //        btnregresar.setStyle("-fx-background-color:orange;");
         
         paneroot.getChildren().addAll(imgvmapa);
-        Scene scene=new Scene(paneroot,730,470);
+        Scene scene=new Scene(paneroot,690,510);
         Stage stage=new Stage();
         stage.setScene(scene);
         stage.show();
@@ -234,7 +236,7 @@ public class VentanaInicioController implements Initializable {
                     ImageView imgvubicacion=new ImageView();
                     // PARA PONER LOS SIMBOLOS DE UBICACIÓN
                     try(FileInputStream input=new FileInputStream(App.rutaImage+"Ubicacion.png")){
-                        Image image=new Image(input,50,50,false,false);
+                        Image image=new Image(input,35,35,false,false);
                         imgvubicacion.setImage(image);
                     }catch(IOException e){
                         System.out.println("Archivo no encontrado"); 
