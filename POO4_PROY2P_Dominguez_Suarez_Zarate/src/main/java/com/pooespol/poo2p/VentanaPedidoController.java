@@ -8,14 +8,13 @@ import modelo.Comida;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -30,6 +29,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -102,13 +102,12 @@ public class VentanaPedidoController implements Initializable {
     @FXML
     private TableColumn<Pedido, String> PedidoPrecio;
 
-//    ObservableList<Pedido> data =FXCollections.observableArrayList(new Pedido("A", 3,9.0),new Pedido("B",2,5.6));
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
         root.setStyle("-fx-background-color:white;");
-        //CargarTipoOrdenamiento();
         CargarTipoComida();
+        cbxOpcionesOrdenar.getItems().addAll("PRECIO","NOMBRE");
         MostrarComidaPorTipo();
         Limpiar();
     }
@@ -120,9 +119,6 @@ public class VentanaPedidoController implements Initializable {
         cbxOpcionesTipo.getItems().add("POSTRE");
     }
 
-    public void CargarTipoOrdenamiento() {
-        cbxOpcionesOrdenar.getItems().add("PRECIO");
-    }
 
     public void MostrarComidaPorOrdenamiento() {
 
@@ -131,40 +127,48 @@ public class VentanaPedidoController implements Initializable {
     public void MostrarComidaPorTipo() {
         cbxOpcionesTipo.addEventHandler(ActionEvent.ACTION, (ActionEvent t) -> {
             String OpcionEscogida = (String) cbxOpcionesTipo.getValue();
-
+            cbxOpcionesOrdenar.setDisable(false);
             switch (OpcionEscogida) {
                 case "PIQUEO":
+//                    CargarTipoOrdenamiento();
                     for (Comida i : App.ListaComida) {
                         if (i.getTipo().equals("Q")) {
                             Lista.add(i);
+                            
+                            
                         }
                     }
                     break;
-                case "PLATO FUERTE":
+                case "PLATO FUERTE":                    
+//                    CargarTipoOrdenamiento();
                     for (Comida i : App.ListaComida) {
                         if (i.getTipo().equals("F")) {
                             Lista.add(i);
+                            
                         }
                     }
                     break;
                 case "BEBIDA":
+//                    CargarTipoOrdenamiento();
                     for (Comida i : App.ListaComida) {
                         if (i.getTipo().equals("B")) {
                             Lista.add(i);
+                            
                         }
                     }
                     break;
                 case "POSTRE":
+//                    CargarTipoOrdenamiento();
                     for (Comida i : App.ListaComida) {
                         if (i.getTipo().equals("P")) {
                             Lista.add(i);
+                            
                         }
                     }
                     break;
             }//fin switch
-            //System.out.println(Lista);
+            
             AgregarComidaPorTipo();
-//            Lista.clear();
 
         } //fin handle
 
@@ -275,120 +279,161 @@ public class VentanaPedidoController implements Initializable {
     @FXML
     public void cambiarVentanaDireccion(ActionEvent event) {
         // Cuando se da continuar se escriben los archivos
-        idPedido = (int) (Math.random() * 9999 + 1111);
-        Pedido pO = new Pedido(ListaPedido, cl, "null", Subtotal, Iva, Total);
-        EscribirArchivoPedido(idPedido, cl.getNombre(), Total);
-        EscribirArchivoPedidoSerialido(pO, idPedido);
+        if(!(txtTotal.getText().isEmpty()) && !(txtTotal.getText().equals("0.00"))){
+            idPedido = (int) (Math.random() * 9999 + 1111);
+            Pedido pO = new Pedido(ListaPedido, cl, "null", Subtotal, Iva, Total);
+            EscribirArchivoPedido(idPedido, cl.getNombre(), Total);
+            EscribirArchivoPedidoSerialido(pO, idPedido);
 
-        VBox root2 = new VBox();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root2, 600, 650); //600,452
-        stage.setScene(scene);
-        stage.show();
-        stage.setTitle("Direccion");
+            VBox root2 = new VBox();
+            Stage stage = new Stage();
+            Scene scene = new Scene(root2, 600, 452); //600,452
+            stage.setScene(scene);
+            stage.show();
+            stage.setTitle("Direccion");
 
-        Stage stage2 = (Stage) btnContinuar.getScene().getWindow();
-        stage2.close();
+            Stage stage2 = (Stage) btnContinuar.getScene().getWindow();
+            stage2.close();
 
-        Label titulo = new Label("Dirección de entrega");
-        titulo.setStyle("-fx-font-weight: bold; -fx-font-size:30; -fx-font-family: System; -fx-text-fill: #ffa500 ");
+            Label titulo = new Label("Dirección de entrega");
+            titulo.setStyle("-fx-font-weight: bold; -fx-font-size:30; -fx-font-family: System; -fx-text-fill: #ffa500 ");
 
-        HBox hbox1 = new HBox();
-        Label label = new Label("Dirección:");
-        TextField direccion = new TextField();
-        direccion.setPrefHeight(25);
-        direccion.setPrefWidth(497);
-        hbox1.getChildren().addAll(label, direccion);
-        hbox1.setAlignment(Pos.TOP_LEFT);
-        hbox1.setSpacing(10);
+            HBox hbox1 = new HBox();
+            Label label = new Label("Dirección:");
+            TextField direccion2 = new TextField();
+            direccion2.setPrefHeight(25);
+            direccion2.setPrefWidth(497);
+            hbox1.getChildren().addAll(label, direccion2);
+            hbox1.setAlignment(Pos.TOP_LEFT);
+            hbox1.setSpacing(10);
 
-        Label detalle = new Label("Detalle de pago");
-        detalle.setStyle("-fx-font-weight: bold; -fx-font-size:30; -fx-font-family: System;-fx-text-fill: #ffa500");
+            Label detalle = new Label("Detalle de pago");
+            detalle.setStyle("-fx-font-weight: bold; -fx-font-size:30; -fx-font-family: System;-fx-text-fill: #ffa500");
 
-        HBox hbox2 = new HBox();
-        RadioButton efectivo = new RadioButton("Efectivo");
-        RadioButton tarjeta = new RadioButton("Tarjeta de crédito");
-        hbox2.getChildren().addAll(efectivo, tarjeta);
-        hbox2.setAlignment(Pos.TOP_LEFT);
-        hbox2.setSpacing(20);
+            HBox hbox2 = new HBox();
+            RadioButton efectivo = new RadioButton("Efectivo");
+            RadioButton tarjeta = new RadioButton("Tarjeta de crédito");
+            hbox2.getChildren().addAll(efectivo, tarjeta);
+            hbox2.setAlignment(Pos.TOP_LEFT);
+            hbox2.setSpacing(20);
 
-        HBox agregarDatos = new HBox();
+//            HBox agregarDatos = new HBox();
 
-        Label descripcionPago = new Label("Aqui debe ir la descripcion del pago");
+            Label descripcionPago = new Label();
 
-        VBox seccionPago = new VBox();
-        HBox hbox4 = new HBox();
-        Button continuar = new Button("Continuar");
-        continuar.setStyle("-fx-background-color: #fda10e; -fx-font-weight: bold;");
-        Button limpiar = new Button("Limpiar");
-        limpiar.setStyle("-fx-background-color: #fda10e; -fx-font-weight: bold;");
-        hbox4.getChildren().addAll(continuar, limpiar);
-        hbox4.setAlignment(Pos.CENTER);
-        hbox4.setSpacing(30);
+            HBox seccionPago = new HBox();
+            HBox hbox4 = new HBox();
+            Button continuar = new Button("Continuar");
+            continuar.setStyle("-fx-background-color: #fda10e; -fx-font-weight: bold;");
+            Button limpiar = new Button("Limpiar");
+            limpiar.setStyle("-fx-background-color: #fda10e; -fx-font-weight: bold;");
+            hbox4.getChildren().addAll(continuar, limpiar);
+            hbox4.setAlignment(Pos.CENTER);
+            hbox4.setSpacing(30);
 
-        root2.getChildren().addAll(titulo, hbox1, detalle, hbox2, agregarDatos, descripcionPago, seccionPago, hbox4);
-        root2.setStyle("-fx-background-color: white");
-        root2.setAlignment(Pos.TOP_LEFT);
-        root2.setPadding(new Insets(20, 20, 20, 20));
-        root2.setSpacing(20);
+            root2.getChildren().addAll(titulo, hbox1, detalle, hbox2, seccionPago, descripcionPago, hbox4);
+            root2.setStyle("-fx-background-color: white");
+            root2.setAlignment(Pos.TOP_LEFT);
+            root2.setPadding(new Insets(20, 20, 20, 20));
+            root2.setSpacing(20);
 
-        //METODO PAGO
-        efectivo.addEventFilter(ActionEvent.ACTION, (Event t) -> {
-            tipo = "E";
-            descripcionPago.setText("Tendrá que pagar un total de " + Total + " dólares" + "\n" + "Asegurese de tener el dinero completo por si el repartidor "
-                    + "no tiene cambio");
-        });
-
-        tarjeta.addEventFilter(ActionEvent.ACTION, (Event t) -> {
-            tipo = "C";
-            HBox titular = new HBox();
+            ToggleGroup metodosPagar=new ToggleGroup();
+            efectivo.setToggleGroup(metodosPagar);
+            tarjeta.setToggleGroup(metodosPagar);
+            
+            VBox labels = new VBox();
             Label lbtitular = new Label();
-            lbtitular.setText("Titular");
-            TextField txtTitular = new TextField();
-            titular.getChildren().addAll(lbtitular, txtTitular);
-
-            HBox numero = new HBox();
             Label lbnumero = new Label();
-            lbnumero.setText("Número");
-            TextField txtnumero = new TextField();
-            numero.getChildren().addAll(lbnumero, txtnumero);
-
-            HBox caducidad = new HBox();
             Label lbCaducidad = new Label();
-            lbCaducidad.setText("Caducidad");
-            TextField txtCaducidad = new TextField();
-            caducidad.getChildren().addAll(lbCaducidad, txtCaducidad);
-
-            HBox Cvv = new HBox();
             Label lbCVV = new Label();
-            lbCVV.setText("CVV");
+            labels.getChildren().addAll(lbtitular, lbnumero,lbCaducidad,lbCVV);
+            
+            VBox textfields = new VBox();
+            TextField txtTitular = new TextField();
+            TextField txtnumero = new TextField();
+            TextField txtCaducidad = new TextField();
             TextField txtCVV = new TextField();
-            Cvv.getChildren().addAll(lbCVV, txtCVV);
+            textfields.getChildren().addAll(txtTitular, txtnumero,txtCaducidad,txtCVV);
+            
+            seccionPago.setVisible(false);
 
-            Label lmsgtarjeta = new Label();
-            lmsgtarjeta.setText("Tendrá que pagar un total de " + (Total + (Total * 0.05)) + " por el incremento del 5% por uso de tarjeta"
-                    + "no tiene cambio");
+            //METODO PAGO
+            
+            efectivo.addEventHandler(ActionEvent.ACTION, (Event t)->{
+                tipo = "E";
+                seccionPago.getChildren().clear();
+                descripcionPago.setText("Tendrá que pagar un total de " + Total + " dólares" + "\n" + "Asegurese de tener el dinero completo por si el repartidor "
+                        + "no tiene cambio");
+            });
+            tarjeta.addEventHandler(ActionEvent.ACTION, (Event t)->{
+                seccionPago.setVisible(true);
+                
+                seccionPago.getChildren().clear();
+                tipo = "C";
+                
+                lbtitular.setText("Titular");
+                lbnumero.setText("Número");
+                lbCaducidad.setText("Caducidad");
+                lbCVV.setText("CVV");                               
+                
+                labels.setSpacing(15);
+                
+                textfields.setSpacing(8);
+                
+                seccionPago.setSpacing(10);
 
-            descripcionPago.setText("");
-            seccionPago.getChildren().addAll(titular, numero, caducidad, Cvv, lmsgtarjeta);
-        });
+                descripcionPago.setText("Tendrá que pagar un total de " + (Total + (Total * 0.05)) + " por el incremento del 5% por uso de tarjeta");
+ 
+                seccionPago.getChildren().addAll(labels,textfields);
+            });
+            
 
-        continuar.setOnAction((ActionEvent t) -> {
-            int idPago = (int) (Math.random() * 9999 + 1111);
-            try ( BufferedWriter bfw = new BufferedWriter(new FileWriter("Pagos.txt", true))) {
-                bfw.write("\n"+idPago+","+idPedido+","+cl.getNombre()+","+Total+","+"29/01/23"+","+tipo);
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("Error");
+            alerta.setContentText("Por favor, llene todos los datos");
+            continuar.setOnAction((ActionEvent t) -> {
+                if((!efectivo.isSelected() | !tarjeta.isSelected()) && direccion2.getText().isEmpty()){
+                    Optional<ButtonType> opciones = alerta.showAndWait();
+                }else if(tarjeta.isSelected() && (txtTitular.getText().isEmpty() | txtnumero.getText().isEmpty() |
+                    txtCaducidad.getText().isEmpty() | txtCVV.getText().isEmpty())){
+                    Optional<ButtonType> opciones = alerta.showAndWait();
+                }else{
+                    int idPago = (int) (Math.random() * 9999 + 1111);
+                    try ( BufferedWriter bfw = new BufferedWriter(new FileWriter("Pagos.txt", true))) {
+                        LocalDate fechahoy=LocalDate.now();
+                        bfw.write("\n"+idPago+","+idPedido+","+cl.getNombre()+","+Total+","+fechahoy+","+tipo);
 
-            } catch (IOException ex) {
-                System.out.println("Error al escribir el archivo");
-            }
+                    } catch (IOException ex) {
+                        System.out.println("Error al escribir el archivo");
+                    }
 
-            Stage stage3 = (Stage) continuar.getScene().getWindow();
-            stage3.close();
+                    Stage stage3 = (Stage) continuar.getScene().getWindow();
+                    stage3.close();
 
-            cargarVentanaFinal(idPedido);
-        });
+                    cargarVentanaFinal(idPedido);
+                }
 
+            });
+            
+            limpiar.setOnAction((ActionEvent t) -> {
+                direccion2.setText(null);
+                efectivo.setSelected(false);
+                tarjeta.setSelected(false);
+                seccionPago.getChildren().clear();
+                descripcionPago.setText(null);
+                txtTitular.clear();
+                txtnumero.clear();
+                txtCaducidad.clear();
+                txtCVV.clear();
+            });
+        }else{
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("Error");
+            alerta.setContentText("No ha escogido ninguna opcion");
+            Optional<ButtonType> opciones = alerta.showAndWait();
+        }
     }//METODO
+       
 
     public void cargarListaPedido(String descripcion, String cantidad, double total) {
 
