@@ -23,6 +23,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -38,7 +39,6 @@ import modelo.Local;
 
 public class VentanaInicioController implements Initializable {
     public ArrayList<Cliente> listaClientes=Cliente.CargarClientesCl();
-//    public String[] listaDatosClientes=Cliente.CargarClientes();
     static Cliente cliente;
     
     @FXML
@@ -46,7 +46,7 @@ public class VentanaInicioController implements Initializable {
     @FXML
     private  TextField txtUsuario;
     @FXML
-    private  TextField txtContraseña;
+    private  PasswordField txtContraseña;
     @FXML
     private ImageView imgvFotoRepartidor;
     @FXML
@@ -91,7 +91,6 @@ public class VentanaInicioController implements Initializable {
     
     public void CargarVentanaBienvenida(){
         //Creación de la nueva ventana 
-//        CargarCliente();
         HBox root=new HBox();
         root.setStyle("-fx-background-color: black");
         ImageView imgv=new ImageView();

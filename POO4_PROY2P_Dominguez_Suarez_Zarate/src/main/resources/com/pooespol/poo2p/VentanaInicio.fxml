@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -56,11 +57,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="txtContraseña">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </TextField>
+            <PasswordField fx:id="txtContraseña" />
          </children>
          <VBox.margin>
             <Insets top="20.0" />

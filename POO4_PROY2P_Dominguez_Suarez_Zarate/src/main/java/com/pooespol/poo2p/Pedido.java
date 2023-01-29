@@ -12,7 +12,7 @@ import modelo.Cliente;
  *
  * @author DELL
  */
-public class Pedido implements Serializable{
+public class Pedido implements Serializable, Comparable<Pedido>{
     
     String descripcion;
     String cantidad;
@@ -119,7 +119,20 @@ public class Pedido implements Serializable{
     public String toString() {
         return "Descripcion=" + descripcion + ", cantidad=" + cantidad + ", precio=" + precio;
     }
+
+    @Override
+    public int compareTo(Pedido o) {
+        if(this.precio>o.precio){
+            return 1;
+        }else if(this.precio<o.precio){
+            return -1;
+        }
+        return 0;
+    }
     
+    public int compareToNombre(Pedido o) {    
+        return this.descripcion.compareToIgnoreCase(o.descripcion);
+    }
     
     
     

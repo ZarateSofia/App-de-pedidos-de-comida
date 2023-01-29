@@ -213,7 +213,6 @@ public class VentanaPedidoController implements Initializable {
             Button btnAgregar = new Button();
             contenedor.setText(k.getDescripcion());
             contenedor.setPadding(new Insets(10));
-//            contenedor.setPrefWidth(15);
             precio.setText(String.valueOf(k.getPrecio()));
             precio.setPadding(new Insets(10));
             btnAgregar.setText("Agregar");
@@ -232,6 +231,7 @@ public class VentanaPedidoController implements Initializable {
                         ListaPedido.add(new Pedido(k.getDescripcion(), cantidad.getText(), precioPorCantidad));
                         Subtotal += precioPorCantidad;
                         txtSubtotal.setText(String.valueOf(Subtotal));
+                        System.out.println(ListaPedido);
                         Iva = Subtotal * 0.12;
                         txtIva.setText(String.valueOf(Iva));
                         Total = Subtotal + Iva;
@@ -272,6 +272,9 @@ public class VentanaPedidoController implements Initializable {
             txtTotal.setText("0.00");
             txtSubtotal.setText("0.00");
             txtIva.setText("0.00");
+            Total=0;
+            Subtotal=0;
+            Iva=0;
             ListaPedido.clear(); //NO SE ME LIMPIA LA LISTA***
         });
     }
@@ -316,8 +319,6 @@ public class VentanaPedidoController implements Initializable {
             hbox2.getChildren().addAll(efectivo, tarjeta);
             hbox2.setAlignment(Pos.TOP_LEFT);
             hbox2.setSpacing(20);
-
-//            HBox agregarDatos = new HBox();
 
             Label descripcionPago = new Label();
 
