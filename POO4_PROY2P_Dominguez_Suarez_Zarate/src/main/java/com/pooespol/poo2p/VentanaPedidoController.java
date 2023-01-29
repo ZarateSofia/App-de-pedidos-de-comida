@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -242,20 +243,36 @@ public class VentanaPedidoController implements Initializable {
             vBP.getChildren().add(precio);
             vBC.getChildren().add(cantidad);
 
-            //TRATANDO DE METER ELEMENTOS EN LA TABLA DE PEDIDO
+            //METER ELEMENTOS EN LA TABLA DE PEDIDO
+            
+            PedidoDescripcion.getColumns().clear();
+            PedidoCantidad.getColumns().clear();
+            PedidoPrecio.getColumns().clear();
+            
             btnAgregar.addEventHandler(ActionEvent.ACTION, (ActionEvent t) -> {
                 try {
                     if((Integer.valueOf(cantidad.getText()))!=0){
                         double precioPorCantidad = k.getPrecio() * Integer.parseInt(cantidad.getText());
-                        cargarListaPedido(k.getDescripcion(), cantidad.getText(), precioPorCantidad);
+                        
                         ListaPedido.add(new Pedido(k.getDescripcion(), cantidad.getText(), precioPorCantidad));
+                        System.out.println(ListaPedido);
+                        
+                        Collections.sort(ListaPedido);
+                        System.out.println(ListaPedido);
+                        
+                        
+                        cargarListaPedido(ListaPedido);                        
+                        
+                        
                         Subtotal += precioPorCantidad;
                         txtSubtotal.setText(String.valueOf(Subtotal));
-                        System.out.println(ListaPedido);
+                        
                         Iva = Subtotal * 0.12;
                         txtIva.setText(String.valueOf(Iva));
+                        
                         Total = Subtotal + Iva;
                         txtTotal.setText(String.valueOf(Total));
+                        
                     }else{
                         throw new ValorInsuficienteException("Ingrese una cantidad valida");
                     }
@@ -298,7 +315,7 @@ public class VentanaPedidoController implements Initializable {
             Total=0;
             Subtotal=0;
             Iva=0;
-            ListaPedido.clear(); //NO SE ME LIMPIA LA LISTA***
+            ListaPedido.clear(); 
         });
     }
 
@@ -472,11 +489,9 @@ public class VentanaPedidoController implements Initializable {
        
 /**
  * Se mostrará en una tabla, todas las comidas que el cliente quiere ordenar para su pedido, incluyendo la cantidad y precio de cada comida
- * @param descripcion. La descripcion de la comida a mostrar
- * @param cantidad. Cantidad de unidades que se desee ordenar
- * @param total. Precio total por todas las unidades de cada comida 
+ * @param lista
  */
-    public void cargarListaPedido(String descripcion, String cantidad, double total) {
+    public void cargarListaPedido(ArrayList<Pedido> lista) {
 
         TablaPedidos.setEditable(true);
 
@@ -486,7 +501,7 @@ public class VentanaPedidoController implements Initializable {
 
         PedidoPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
 
-        TablaPedidos.getItems().add(new Pedido(descripcion, cantidad, total));
+        TablaPedidos.getItems().addAll(lista);
 
     }
 

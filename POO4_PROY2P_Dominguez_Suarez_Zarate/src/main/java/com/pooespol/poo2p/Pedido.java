@@ -215,17 +215,17 @@ public class Pedido implements Serializable, Comparable<Pedido>{
      */
     @Override
     public int compareTo(Pedido o) {
-        if(this.precio>o.precio){
+        if((this.precio*Integer.valueOf(this.cantidad))>(o.precio*Integer.valueOf(o.cantidad))){
             return 1;
-        }else if(this.precio<o.precio){
+        }else if((this.precio*Integer.valueOf(this.cantidad))<(o.precio*Integer.valueOf(o.cantidad))){
             return -1;
         }
         return 0;
     }
     
-    public int compareToNombre(Pedido o) {    
-        return this.descripcion.compareToIgnoreCase(o.descripcion);
-    }
+//    public int compareToNombre(Pedido o) {    
+//        return this.descripcion.compareToIgnoreCase(o.descripcion);
+//    }
     
     
     
