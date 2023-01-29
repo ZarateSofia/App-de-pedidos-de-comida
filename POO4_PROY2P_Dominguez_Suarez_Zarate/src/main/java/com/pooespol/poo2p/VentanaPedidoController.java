@@ -42,9 +42,19 @@ import javafx.stage.Stage;
 import modelo.Cliente;
 import modelo.ValorInsuficienteException;
 
+/**
+ * Esta clase es un controlador de una VentanaPedido.fxml
+ * @author Gamer
+ */
 public class VentanaPedidoController implements Initializable {
-
+    /**
+     * En esta lista se guardara la comida que el clienta vea, dependiendo del tipo que escoja
+     */
     public ArrayList<Comida> Lista = new ArrayList<>();
+    
+    /**
+     * Lista donde se guardara lo que el cliente elija
+     */
     public ArrayList<Pedido> ListaPedido = new ArrayList<>();
     public double Subtotal = 0;
     public double Iva = 0;
@@ -52,6 +62,9 @@ public class VentanaPedidoController implements Initializable {
     int idPedido;
     String direccion;
     String tipo;
+    /**
+     * cliente que se encuentra haciendo su pedido
+     */
     Cliente cl = VentanaInicioController.devolverCliente();
 
     @FXML
@@ -111,7 +124,9 @@ public class VentanaPedidoController implements Initializable {
         MostrarComidaPorTipo();
         Limpiar();
     }
-
+/**
+ * Opciones que tendra el cliente para elejir el tipo de comida que quiera
+ */
     public void CargarTipoComida() {
         cbxOpcionesTipo.getItems().add("PIQUEO");
         cbxOpcionesTipo.getItems().add("PLATO FUERTE");
@@ -124,6 +139,9 @@ public class VentanaPedidoController implements Initializable {
 
     }//VACIO
 
+    /**
+     * Dependiendo del tipo de comida que elija el cliente, se guardara la comida del mismo tipo que sera guardada en una lista para ser mostrada
+     */
     public void MostrarComidaPorTipo() {
         cbxOpcionesTipo.addEventHandler(ActionEvent.ACTION, (ActionEvent t) -> {
             String OpcionEscogida = (String) cbxOpcionesTipo.getValue();
@@ -175,7 +193,9 @@ public class VentanaPedidoController implements Initializable {
         );//fin controladorevento
 
     }
-
+/**
+ * Se mostrara por ventana la comida del tipo que el cliente elijió, con la opción de poder agregar esa comida a un pedido que haga
+ */
     public void AgregarComidaPorTipo() {
         vBD.getChildren().clear();
         vBP.getChildren().clear();
@@ -262,6 +282,9 @@ public class VentanaPedidoController implements Initializable {
 
     }//metodo
 
+    /**
+     * Limpia la ventana del usuario para poder mostrar otras comidas
+     */
     public void Limpiar() {
         btnLimpiar.addEventHandler(ActionEvent.ACTION, (ActionEvent t) -> {
             vBD.getChildren().clear();
@@ -279,6 +302,10 @@ public class VentanaPedidoController implements Initializable {
         });
     }
 
+    /**
+     * Se abrira una nueva ventana para completar el pedido que tenga el cliente
+     * @param event. Se ejecutará el metodo una vez reciba un evento 
+     */
     @FXML
     public void cambiarVentanaDireccion(ActionEvent event) {
         // Cuando se da continuar se escriben los archivos
@@ -443,7 +470,12 @@ public class VentanaPedidoController implements Initializable {
         }
     }//METODO
        
-
+/**
+ * Se mostrará en una tabla, todas las comidas que el cliente quiere ordenar para su pedido, incluyendo la cantidad y precio de cada comida
+ * @param descripcion. La descripcion de la comida a mostrar
+ * @param cantidad. Cantidad de unidades que se desee ordenar
+ * @param total. Precio total por todas las unidades de cada comida 
+ */
     public void cargarListaPedido(String descripcion, String cantidad, double total) {
 
         TablaPedidos.setEditable(true);
@@ -458,6 +490,10 @@ public class VentanaPedidoController implements Initializable {
 
     }
 
+    /**
+     * Ventada a mostrar una vez realizado el pedido 
+     * @param pedido. El pedido a ser enviado
+     */
     public void cargarVentanaFinal(int pedido) {
         VBox rootFinal = new VBox();
         rootFinal.setAlignment(Pos.CENTER);
@@ -544,6 +580,12 @@ public class VentanaPedidoController implements Initializable {
 
     }
 
+    /**
+     * Agrega los pedidos que han sido realizados
+     * @param idpedido. Identificador del pedido
+     * @param nombreCliente. Cliente que realizó el pedido
+     * @param total. El total de ese pedido 
+     */
     public void EscribirArchivoPedido(int idpedido, String nombreCliente, double total) {
         try ( BufferedWriter bfw = new BufferedWriter(new FileWriter("Pedidos.txt", true))) {
             bfw.write("\n"+idpedido + "," + nombreCliente + "," + total);
@@ -553,6 +595,11 @@ public class VentanaPedidoController implements Initializable {
         }
     }
 
+    /**
+     * Escribe un archivo seralizado del pedido que fue enviado
+     * @param p. Pedido a serializar
+     * @param idPedido. Identificador del pedido a serializar 
+     */
     public void EscribirArchivoPedidoSerialido(Pedido p, int idPedido) {
         try ( ObjectOutputStream obj = new ObjectOutputStream(new FileOutputStream("pedido" + idPedido + ".bin"))) {
             obj.writeObject(p);

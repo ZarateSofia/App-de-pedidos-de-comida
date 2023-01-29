@@ -5,7 +5,7 @@
 package modelo;
 
 /**
- *
+ * Esta clase construye una excepcion verificada
  * @author DELL
  */
 public class ValorInsuficienteException extends Exception{

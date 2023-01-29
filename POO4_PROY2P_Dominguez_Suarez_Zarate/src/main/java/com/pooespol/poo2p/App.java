@@ -14,12 +14,31 @@ import modelo.Comida;
  * JavaFX App
  */
 public class App extends Application {
-
+    /**
+     * Escenario donde esta el root con la informacion a mostrar
+     */
     public static Scene scene;
+    
+    /**
+     * Ruta de las imagenes
+     */
     public static String rutaImage ="src/main/resources/images/";
+    
+    /**
+     * Ruta de los archivos
+     */
     public static String rutaFile ="src/main/resources/files/";
+    
+    /**
+     * Lista de todas las comidas 
+     */
     public static ArrayList<Comida> ListaComida=Comida.CargarMenu();
 
+    /**
+     * Mostramos la ventana principal
+     * @param stage. Escenario a ser mostrado
+     * @throws Exception Excepcion verificada que es lanzada por el metodo
+     */
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmLoader=new FXMLLoader(App.class.getResource("VentanaInicio.fxml"));

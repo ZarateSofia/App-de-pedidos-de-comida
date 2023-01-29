@@ -36,7 +36,10 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import modelo.Local;
 
-
+/**
+ * Clase controladora de VentanaInicio.fxml
+ * @author Gamer
+ */
 public class VentanaInicioController implements Initializable {
     public ArrayList<Cliente> listaClientes=Cliente.CargarClientesCl();
     static Cliente cliente;
@@ -57,7 +60,9 @@ public class VentanaInicioController implements Initializable {
         agregarEstiloVentanaInicio();
     } 
 
-
+/**
+ * Pone estilo a la ventana inicial
+ */
     public void agregarEstiloVentanaInicio(){
         VBoxroot.setStyle("-fx-background-color: white");
         try(FileInputStream input=new FileInputStream(App.rutaImage+"FotoRepartidor.jpg")){
@@ -75,6 +80,11 @@ public class VentanaInicioController implements Initializable {
         }
     }
     
+    /**
+     * Una vez se comprueba el usuario, se ingresa a la ventana de opciones
+     * @param action. Una vez recibida, se ejecuta el metodo
+     * @throws IOException Excepcion verificada que es lanzada por el método
+     */
     @FXML
     public void Ingresar(ActionEvent action) throws IOException {
         if(ValidarUsuario()==true){ 
@@ -89,6 +99,9 @@ public class VentanaInicioController implements Initializable {
         }
     }
     
+    /**
+     * Se carga la ventana de inicio, donde el usuario puede elejir que hacer
+     */
     public void CargarVentanaBienvenida(){
         //Creación de la nueva ventana 
         HBox root=new HBox();
@@ -176,6 +189,10 @@ public class VentanaInicioController implements Initializable {
         App.scene.setRoot(root);
     }
     
+    /**
+     * Comprobacion del usuario
+     * @return Devuelve true si es un usuario valido, caso contrario false
+     */
     public boolean ValidarUsuario() {
         String usuario = txtUsuario.getText();
         String contraseña = txtContraseña.getText();
@@ -189,6 +206,9 @@ public class VentanaInicioController implements Initializable {
         return validar;  
     }
     
+    /**
+     * Muestra los mapas con distintos locales para ser elejidos por un usuario
+     */
     public void MostrarMapa(){
         Pane paneroot=new Pane();
         paneroot.setPrefWidth(690);
@@ -338,7 +358,10 @@ public class VentanaInicioController implements Initializable {
         
     }  
 
-
+/**
+ * 
+ * @return devuelve un objeto de tipo cliente 
+ */
     public static Cliente devolverCliente(){
         return cliente;
     }
