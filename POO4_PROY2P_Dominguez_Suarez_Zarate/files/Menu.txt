@@ -1,0 +1,21 @@
+Hamburguesa simple,5.00,F
+Taco de pollo,4.50,F
+Hot dog chilli,3.50,F
+Tigrillo,3.00,F
+Encebollado,1.50,F
+Tiramisu,4.00,P
+Helado vainilla,1.00,P
+Tres leches,3.50,P
+Banana split,4.00,P
+Cheesecake maracuya,2.50,P
+Coca cola 400 ml,2.00,B
+Budweiser 300 ml,2.00,B
+Club verde 500 ml,3.50,B
+Sprite 1000l,2.50,B
+Cania manaba 2000 ml, 12.00,B
+Deditos de queso x5,3.00,Q
+Nachos con queso,4.00,Q
+Tequeños x4,3.00,Q
+Empanadas x5,5.00,Q
+Cupcakes x5,7.00,Q
+

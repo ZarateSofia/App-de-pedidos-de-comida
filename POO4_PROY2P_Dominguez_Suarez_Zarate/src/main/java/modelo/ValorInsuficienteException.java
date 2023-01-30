@@ -10,6 +10,10 @@ package modelo;
  */
 public class ValorInsuficienteException extends Exception{
     
+    /**
+     * Constructor de excepcion verificada
+     * @param msg. Mensaje que se mostrara cuando suceda la excepcion 
+     */
     public ValorInsuficienteException(String msg){
         super(msg);
     }    

@@ -22,12 +22,12 @@ public class App extends Application {
     /**
      * Ruta de las imagenes
      */
-    public static String rutaImage ="src/main/resources/images/";
+    public static String rutaImage ="images/";
     
     /**
      * Ruta de los archivos
      */
-    public static String rutaFile ="src/main/resources/files/";
+    public static String rutaFile ="files/";
     
     /**
      * Lista de todas las comidas 
@@ -49,19 +49,33 @@ public class App extends Application {
         
     }
     
+    /**
+     * 
+     * @param fxml
+     * @throws IOException 
+     */
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
       
         
     }
     
+    /**
+     * Metodo que carga un fxml
+     * @param fxml. Ruta del fxml 
+     * @return Devuelve el fxml cargado
+     * @throws IOException El metodo lanza el excepcion verificada
+     */
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
     
     
-
+    /**
+     * Metodo que inicia la ventana
+     * @param args. Codigo a recibir para iniciar la ventana 
+     */
     public static void main(String[] args) {
         launch();
     }

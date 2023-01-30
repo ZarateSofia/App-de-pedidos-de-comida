@@ -8,6 +8,7 @@ import modelo.Comida;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -141,6 +142,9 @@ public class VentanaPedidoController implements Initializable {
         cbxOpcionesTipo.getItems().add("POSTRE");
     }
 
+    /**
+     * Metodo que muestra en el tableview el orden que elije el usuario
+     */
     public void MostrarComidaPorOrdenamiento() {
         cbxOpcionesOrdenar.addEventHandler(ActionEvent.ACTION, (ActionEvent t) -> {
             String opcionEscogida = (String) cbxOpcionesOrdenar.getValue();
@@ -289,12 +293,13 @@ public class VentanaPedidoController implements Initializable {
 
                         Subtotal += precioPorCantidad;
                         txtSubtotal.setText(String.valueOf(Subtotal));
+                        DecimalFormat df= new DecimalFormat("#.00");
 
                         Iva = Subtotal * 0.12;
-                        txtIva.setText(String.valueOf(Iva));
+                        txtIva.setText(String.valueOf(df.format(Iva)));
 
                         Total = Subtotal + Iva;
-                        txtTotal.setText(String.valueOf(Total));
+                        txtTotal.setText(String.valueOf(df.format(Total)));
 
                     } else {
                         throw new ValorInsuficienteException("Ingrese una cantidad valida");
