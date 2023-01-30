@@ -11,6 +11,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -144,15 +145,25 @@ public class VentanaPedidoController implements Initializable {
         cbxOpcionesOrdenar.addEventHandler(ActionEvent.ACTION, (ActionEvent t) -> {
             String opcionEscogida = (String) cbxOpcionesOrdenar.getValue();
             if (opcionEscogida.equals("PRECIO")) {
- 
+                Collections.sort(ListaPedido);
+                Collections.sort(ListaPedido);
+                Collections.sort(ListaPedido);
+                cargarListaPedido(ListaPedido);
 
             } else if (opcionEscogida.equals("NOMBRE")) {
-
+                Collections.sort(ListaPedido, new Comparator<Pedido>(){
+                    @Override
+                    public int compare(Pedido o1, Pedido o2) {
+                        return o1.getDescripcion().compareToIgnoreCase(o2.getDescripcion());
+                    }
+                });
+                cargarListaPedido(ListaPedido);
+                
             }
 
         });
 
-    }//VACIO
+    }
 
     /**
      * Dependiendo del tipo de comida que elija el cliente, se guardara la
@@ -454,13 +465,7 @@ public class VentanaPedidoController implements Initializable {
                 } else if (tarjeta.isSelected() && (txtTitular.getText().isEmpty() | txtnumero.getText().isEmpty()
                         | txtCaducidad.getText().isEmpty() | txtCVV.getText().isEmpty())) {
                     Optional<ButtonType> opciones = alerta.showAndWait();
-
-//                }else if(!(cl.getTarjetaCredito().equals(txtnumero.getText()))){
-//                    Alert alerta2 = new Alert(Alert.AlertType.ERROR);
-//                    alerta2.setTitle("Error");
-//                    alerta2.setContentText("Tarjeta de credito incorrecta");
-//                    Optional<ButtonType> opciones = alerta2.showAndWait();
-//                    
+                    
                 } else {
                     pO.setDireccion(direccion2.getText());
                     EscribirArchivoPedidoSerialido(pO, idPedido);

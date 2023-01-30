@@ -102,7 +102,7 @@ public class Comida {
             linea=bf.readLine();
         }
         }catch(IOException |RuntimeException e){
-                    //System.out.println("Archivo no encontrado "+e.getMessage());
+            System.out.println("Archivo no encontrado "+e.getMessage());
         }
         return menu;
     }

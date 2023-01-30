@@ -223,9 +223,6 @@ public class Pedido implements Serializable, Comparable<Pedido>{
         return 0;
     }
     
-//    public int compareToNombre(Pedido o) {    
-//        return this.descripcion.compareToIgnoreCase(o.descripcion);
-//    }
     
     
     

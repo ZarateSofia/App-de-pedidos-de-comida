@@ -223,14 +223,6 @@ public class VentanaInicioController implements Initializable {
         
         imgvmapa.setFitWidth(690);
         imgvmapa.setFitHeight(510);
-//        Button btnregresar=new Button();
-//        btnregresar.setPrefWidth(100);
-//        btnregresar.setPrefHeight(40);
-//        btnregresar.setAlignment(Pos.CENTER);
-//        btnregresar.setText("Regresar");
-//        btnregresar.setLayoutX(850);
-//        btnregresar.setLayoutY(608);
-//        btnregresar.setStyle("-fx-background-color:orange;");
         
         paneroot.getChildren().addAll(imgvmapa);
         Scene scene=new Scene(paneroot,690,510);
@@ -238,14 +230,6 @@ public class VentanaInicioController implements Initializable {
         stage.setScene(scene);
         stage.show();
         
-//        btnregresar.addEventHandler(ActionEvent.ACTION, new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent t) {
-//                stage.close();
-//                CargarVentanaBienvenida();
-//            }
-//        });
- 
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -359,7 +343,7 @@ public class VentanaInicioController implements Initializable {
     }  
 
 /**
- * 
+ * Devuelve el cliente
  * @return devuelve un objeto de tipo cliente 
  */
     public static Cliente devolverCliente(){
