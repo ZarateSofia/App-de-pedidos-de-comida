@@ -45,14 +45,17 @@ import modelo.ValorInsuficienteException;
 
 /**
  * Esta clase es un controlador de una VentanaPedido.fxml
+ *
  * @author Gamer
  */
 public class VentanaPedidoController implements Initializable {
+
     /**
-     * En esta lista se guardara la comida que el clienta vea, dependiendo del tipo que escoja
+     * En esta lista se guardara la comida que el clienta vea, dependiendo del
+     * tipo que escoja
      */
     public ArrayList<Comida> Lista = new ArrayList<>();
-    
+
     /**
      * Lista donde se guardara lo que el cliente elija
      */
@@ -121,13 +124,15 @@ public class VentanaPedidoController implements Initializable {
 
         root.setStyle("-fx-background-color:white;");
         CargarTipoComida();
-        cbxOpcionesOrdenar.getItems().addAll("PRECIO","NOMBRE");
+        cbxOpcionesOrdenar.getItems().addAll("PRECIO", "NOMBRE");
         MostrarComidaPorTipo();
+        MostrarComidaPorOrdenamiento();
         Limpiar();
     }
-/**
- * Opciones que tendra el cliente para elejir el tipo de comida que quiera
- */
+
+    /**
+     * Opciones que tendra el cliente para elejir el tipo de comida que quiera
+     */
     public void CargarTipoComida() {
         cbxOpcionesTipo.getItems().add("PIQUEO");
         cbxOpcionesTipo.getItems().add("PLATO FUERTE");
@@ -135,13 +140,23 @@ public class VentanaPedidoController implements Initializable {
         cbxOpcionesTipo.getItems().add("POSTRE");
     }
 
-
     public void MostrarComidaPorOrdenamiento() {
+        cbxOpcionesOrdenar.addEventHandler(ActionEvent.ACTION, (ActionEvent t) -> {
+            String opcionEscogida = (String) cbxOpcionesOrdenar.getValue();
+            if (opcionEscogida.equals("PRECIO")) {
+ 
+
+            } else if (opcionEscogida.equals("NOMBRE")) {
+
+            }
+
+        });
 
     }//VACIO
 
     /**
-     * Dependiendo del tipo de comida que elija el cliente, se guardara la comida del mismo tipo que sera guardada en una lista para ser mostrada
+     * Dependiendo del tipo de comida que elija el cliente, se guardara la
+     * comida del mismo tipo que sera guardada en una lista para ser mostrada
      */
     public void MostrarComidaPorTipo() {
         cbxOpcionesTipo.addEventHandler(ActionEvent.ACTION, (ActionEvent t) -> {
@@ -149,44 +164,43 @@ public class VentanaPedidoController implements Initializable {
             cbxOpcionesOrdenar.setDisable(false);
             switch (OpcionEscogida) {
                 case "PIQUEO":
-//                    CargarTipoOrdenamiento();
+
                     for (Comida i : App.ListaComida) {
                         if (i.getTipo().equals("Q")) {
                             Lista.add(i);
-                            
-                            
+
                         }
                     }
                     break;
-                case "PLATO FUERTE":                    
-//                    CargarTipoOrdenamiento();
+                case "PLATO FUERTE":
+
                     for (Comida i : App.ListaComida) {
                         if (i.getTipo().equals("F")) {
                             Lista.add(i);
-                            
+
                         }
                     }
                     break;
                 case "BEBIDA":
-//                    CargarTipoOrdenamiento();
+
                     for (Comida i : App.ListaComida) {
                         if (i.getTipo().equals("B")) {
                             Lista.add(i);
-                            
+
                         }
                     }
                     break;
                 case "POSTRE":
-//                    CargarTipoOrdenamiento();
+
                     for (Comida i : App.ListaComida) {
                         if (i.getTipo().equals("P")) {
                             Lista.add(i);
-                            
+
                         }
                     }
                     break;
             }//fin switch
-            
+
             AgregarComidaPorTipo();
 
         } //fin handle
@@ -194,9 +208,11 @@ public class VentanaPedidoController implements Initializable {
         );//fin controladorevento
 
     }
-/**
- * Se mostrara por ventana la comida del tipo que el cliente elijió, con la opción de poder agregar esa comida a un pedido que haga
- */
+
+    /**
+     * Se mostrara por ventana la comida del tipo que el cliente elijió, con la
+     * opción de poder agregar esa comida a un pedido que haga
+     */
     public void AgregarComidaPorTipo() {
         vBD.getChildren().clear();
         vBP.getChildren().clear();
@@ -206,21 +222,21 @@ public class VentanaPedidoController implements Initializable {
         lbDescripcion.setText("Descripcion");
         lbDescripcion.setStyle("-fx-font-weight: bold");
         lbDescripcion.setPadding(new Insets(5));
-        
+
         Label lbPrecio = new Label();
         lbPrecio.setText("Precio");
         lbPrecio.setStyle("-fx-font-weight: bold");
         lbPrecio.setPadding(new Insets(5));
-        
+
         Label lbCantidad = new Label();
         lbCantidad.setText("Cantidad");
         lbCantidad.setStyle("-fx-font-weight: bold");
         lbCantidad.setPadding(new Insets(5));
-        
+
         Label lbVacio = new Label();
         lbVacio.setText(" ");
         lbVacio.setPadding(new Insets(5));
-        
+
         vBD.getChildren().add(lbDescripcion);
         vBP.getChildren().add(lbPrecio);
         vBC.getChildren().add(lbCantidad);
@@ -244,39 +260,35 @@ public class VentanaPedidoController implements Initializable {
             vBC.getChildren().add(cantidad);
 
             //METER ELEMENTOS EN LA TABLA DE PEDIDO
-            
             PedidoDescripcion.getColumns().clear();
             PedidoCantidad.getColumns().clear();
             PedidoPrecio.getColumns().clear();
-            
+
             btnAgregar.addEventHandler(ActionEvent.ACTION, (ActionEvent t) -> {
                 try {
-                    if((Integer.valueOf(cantidad.getText()))!=0){
+                    if ((Integer.valueOf(cantidad.getText())) != 0) {
                         double precioPorCantidad = k.getPrecio() * Integer.parseInt(cantidad.getText());
-                        
+
                         ListaPedido.add(new Pedido(k.getDescripcion(), cantidad.getText(), precioPorCantidad));
-                        System.out.println(ListaPedido);
-                        
+
                         Collections.sort(ListaPedido);
-                        System.out.println(ListaPedido);
-                        
-                        
-                        cargarListaPedido(ListaPedido);                        
-                        
-                        
+                        Collections.sort(ListaPedido);
+                        Collections.sort(ListaPedido);
+                        cargarListaPedido(ListaPedido);
+
                         Subtotal += precioPorCantidad;
                         txtSubtotal.setText(String.valueOf(Subtotal));
-                        
+
                         Iva = Subtotal * 0.12;
                         txtIva.setText(String.valueOf(Iva));
-                        
+
                         Total = Subtotal + Iva;
                         txtTotal.setText(String.valueOf(Total));
-                        
-                    }else{
+
+                    } else {
                         throw new ValorInsuficienteException("Ingrese una cantidad valida");
                     }
-                    
+
                 } catch (RuntimeException e) {
                     Alert alerta = new Alert(Alert.AlertType.ERROR);
                     alerta.setTitle("Error");
@@ -312,25 +324,26 @@ public class VentanaPedidoController implements Initializable {
             txtTotal.setText("0.00");
             txtSubtotal.setText("0.00");
             txtIva.setText("0.00");
-            Total=0;
-            Subtotal=0;
-            Iva=0;
-            ListaPedido.clear(); 
+            Total = 0;
+            Subtotal = 0;
+            Iva = 0;
+            ListaPedido.clear();
         });
     }
 
     /**
      * Se abrira una nueva ventana para completar el pedido que tenga el cliente
-     * @param event. Se ejecutará el metodo una vez reciba un evento 
+     *
+     * @param event. Se ejecutará el metodo una vez reciba un evento
      */
     @FXML
     public void cambiarVentanaDireccion(ActionEvent event) {
         // Cuando se da continuar se escriben los archivos
-        if(!(txtTotal.getText().isEmpty()) && !(txtTotal.getText().equals("0.00"))){
+        if (!(txtTotal.getText().isEmpty()) && !(txtTotal.getText().equals("0.00"))) {
             idPedido = (int) (Math.random() * 9999 + 1111);
             Pedido pO = new Pedido(ListaPedido, cl, "null", Subtotal, Iva, Total);
             EscribirArchivoPedido(idPedido, cl.getNombre(), Total);
-            EscribirArchivoPedidoSerialido(pO, idPedido);
+            
 
             VBox root2 = new VBox();
             Stage stage = new Stage();
@@ -382,79 +395,79 @@ public class VentanaPedidoController implements Initializable {
             root2.setPadding(new Insets(20, 20, 20, 20));
             root2.setSpacing(20);
 
-            ToggleGroup metodosPagar=new ToggleGroup();
+            ToggleGroup metodosPagar = new ToggleGroup();
             efectivo.setToggleGroup(metodosPagar);
             tarjeta.setToggleGroup(metodosPagar);
-            
+
             VBox labels = new VBox();
             Label lbtitular = new Label();
             Label lbnumero = new Label();
             Label lbCaducidad = new Label();
             Label lbCVV = new Label();
-            labels.getChildren().addAll(lbtitular, lbnumero,lbCaducidad,lbCVV);
-            
+            labels.getChildren().addAll(lbtitular, lbnumero, lbCaducidad, lbCVV);
+
             VBox textfields = new VBox();
             TextField txtTitular = new TextField();
             TextField txtnumero = new TextField();
             TextField txtCaducidad = new TextField();
             TextField txtCVV = new TextField();
-            textfields.getChildren().addAll(txtTitular, txtnumero,txtCaducidad,txtCVV);
-            
+            textfields.getChildren().addAll(txtTitular, txtnumero, txtCaducidad, txtCVV);
+
             seccionPago.setVisible(false);
 
             //METODO PAGO
-            
-            efectivo.addEventHandler(ActionEvent.ACTION, (Event t)->{
+            efectivo.addEventHandler(ActionEvent.ACTION, (Event t) -> {
                 tipo = "E";
                 seccionPago.getChildren().clear();
                 descripcionPago.setText("Tendrá que pagar un total de " + Total + " dólares" + "\n" + "Asegurese de tener el dinero completo por si el repartidor "
                         + "no tiene cambio");
             });
-            tarjeta.addEventHandler(ActionEvent.ACTION, (Event t)->{
+            tarjeta.addEventHandler(ActionEvent.ACTION, (Event t) -> {
                 seccionPago.setVisible(true);
-                
+
                 seccionPago.getChildren().clear();
                 tipo = "C";
-                
+
                 lbtitular.setText("Titular");
                 lbnumero.setText("Número");
                 lbCaducidad.setText("Caducidad");
-                lbCVV.setText("CVV");                               
-                
+                lbCVV.setText("CVV");
+
                 labels.setSpacing(15);
-                
+
                 textfields.setSpacing(8);
-                
+
                 seccionPago.setSpacing(10);
 
                 descripcionPago.setText("Tendrá que pagar un total de " + (Total + (Total * 0.05)) + " por el incremento del 5% por uso de tarjeta");
- 
-                seccionPago.getChildren().addAll(labels,textfields);
+
+                seccionPago.getChildren().addAll(labels, textfields);
             });
-            
 
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("Error");
             alerta.setContentText("Por favor, llene todos los datos");
             continuar.setOnAction((ActionEvent t) -> {
-                if((!efectivo.isSelected() | !tarjeta.isSelected()) && direccion2.getText().isEmpty()){
+                if ((!efectivo.isSelected() | !tarjeta.isSelected()) && direccion2.getText().isEmpty()) {
                     Optional<ButtonType> opciones = alerta.showAndWait();
-                    
-                }else if(tarjeta.isSelected() && (txtTitular.getText().isEmpty() | txtnumero.getText().isEmpty() |
-                    txtCaducidad.getText().isEmpty() | txtCVV.getText().isEmpty())){
+
+                } else if (tarjeta.isSelected() && (txtTitular.getText().isEmpty() | txtnumero.getText().isEmpty()
+                        | txtCaducidad.getText().isEmpty() | txtCVV.getText().isEmpty())) {
                     Optional<ButtonType> opciones = alerta.showAndWait();
-                    
+
 //                }else if(!(cl.getTarjetaCredito().equals(txtnumero.getText()))){
 //                    Alert alerta2 = new Alert(Alert.AlertType.ERROR);
 //                    alerta2.setTitle("Error");
 //                    alerta2.setContentText("Tarjeta de credito incorrecta");
 //                    Optional<ButtonType> opciones = alerta2.showAndWait();
 //                    
-                }else{
+                } else {
+                    pO.setDireccion(direccion2.getText());
+                    EscribirArchivoPedidoSerialido(pO, idPedido);
                     int idPago = (int) (Math.random() * 9999 + 1111);
                     try ( BufferedWriter bfw = new BufferedWriter(new FileWriter("Pagos.txt", true))) {
-                        LocalDate fechahoy=LocalDate.now();
-                        bfw.write("\n"+idPago+","+idPedido+","+cl.getNombre()+","+Total+","+fechahoy+","+tipo);
+                        LocalDate fechahoy = LocalDate.now();
+                        bfw.write("\n" + idPago + "," + idPedido + "," + cl.getNombre() + "," + Total + "," + fechahoy + "," + tipo);
 
                     } catch (IOException ex) {
                         System.out.println("Error al escribir el archivo");
@@ -467,7 +480,7 @@ public class VentanaPedidoController implements Initializable {
                 }
 
             });
-            
+
             limpiar.setOnAction((ActionEvent t) -> {
                 direccion2.setText(null);
                 efectivo.setSelected(false);
@@ -479,21 +492,24 @@ public class VentanaPedidoController implements Initializable {
                 txtCaducidad.clear();
                 txtCVV.clear();
             });
-        }else{
+        } else {
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("Error");
             alerta.setContentText("No ha escogido ninguna opcion");
             Optional<ButtonType> opciones = alerta.showAndWait();
         }
     }//METODO
-       
-/**
- * Se mostrará en una tabla, todas las comidas que el cliente quiere ordenar para su pedido, incluyendo la cantidad y precio de cada comida
- * @param lista
- */
+
+    /**
+     * Se mostrará en una tabla, todas las comidas que el cliente quiere ordenar
+     * para su pedido, incluyendo la cantidad y precio de cada comida
+     *
+     * @param lista
+     */
     public void cargarListaPedido(ArrayList<Pedido> lista) {
 
         TablaPedidos.setEditable(true);
+        TablaPedidos.getItems().clear();
 
         PedidoDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
 
@@ -506,7 +522,8 @@ public class VentanaPedidoController implements Initializable {
     }
 
     /**
-     * Ventada a mostrar una vez realizado el pedido 
+     * Ventada a mostrar una vez realizado el pedido
+     *
      * @param pedido. El pedido a ser enviado
      */
     public void cargarVentanaFinal(int pedido) {
@@ -519,17 +536,15 @@ public class VentanaPedidoController implements Initializable {
         lblAgradecimiento.setText("¡Muchas Gracias!");
         lblAgradecimiento.setTextFill(Color.ORANGE);
         lblAgradecimiento.setStyle("-fx-font-weight: bold; -fx-text-fill: orange; -fx-font-size:30");
-        
-        
-        VBox texto=new VBox();
+
+        VBox texto = new VBox();
         texto.setSpacing(5);
         texto.setAlignment(Pos.CENTER);
-        
+
         Label lbpedido = new Label();
         lbpedido.setText("Su pedido Nro " + pedido + " ha sido pagado y ahora empezaremos a prepararlo");
         lbpedido.setFont(new Font(15));
 
-        
         Label lbtiempo = new Label();
         lbtiempo.setText("En aproximadamente 30 minutos llegará a su destino");
         lbtiempo.setFont(new Font(15));
@@ -538,8 +553,8 @@ public class VentanaPedidoController implements Initializable {
         msgfinal.setText("Gracias por preferirnos");
         msgfinal.setFont(new Font(15));
 
-        texto.getChildren().addAll(lbpedido,lbtiempo,msgfinal);
-        
+        texto.getChildren().addAll(lbpedido, lbtiempo, msgfinal);
+
         ImageView imgv = new ImageView();
         try ( FileInputStream input = new FileInputStream(App.rutaImage + "FotoRepartidor2.jpeg")) {
             Image image = new Image(input, 250, 250, false, false);
@@ -547,15 +562,15 @@ public class VentanaPedidoController implements Initializable {
         } catch (IOException e) {
             System.out.println("Archivo no encontrado");
         }
-        
-        VBox segundos2=new VBox();
+
+        VBox segundos2 = new VBox();
         Label lbcerrando = new Label();
         lbcerrando.setText("Cerrando en 3.....");
         lbcerrando.setPadding(new Insets(0, 35, 0, 20));
         segundos2.setAlignment(Pos.BOTTOM_RIGHT);
         segundos2.getChildren().add(lbcerrando);
-        
-        rootFinal.getChildren().addAll(lblAgradecimiento,texto, imgv, segundos2);
+
+        rootFinal.getChildren().addAll(lblAgradecimiento, texto, imgv, segundos2);
 
         Stage escenario = new Stage();
         Scene escena = new Scene(rootFinal, 600, 500);
@@ -597,13 +612,14 @@ public class VentanaPedidoController implements Initializable {
 
     /**
      * Agrega los pedidos que han sido realizados
+     *
      * @param idpedido. Identificador del pedido
      * @param nombreCliente. Cliente que realizó el pedido
-     * @param total. El total de ese pedido 
+     * @param total. El total de ese pedido
      */
     public void EscribirArchivoPedido(int idpedido, String nombreCliente, double total) {
         try ( BufferedWriter bfw = new BufferedWriter(new FileWriter("Pedidos.txt", true))) {
-            bfw.write("\n"+idpedido + "," + nombreCliente + "," + total);
+            bfw.write("\n" + idpedido + "," + nombreCliente + "," + total);
 
         } catch (IOException ex) {
             System.out.println("Error al escribir el archivo");
@@ -612,8 +628,9 @@ public class VentanaPedidoController implements Initializable {
 
     /**
      * Escribe un archivo seralizado del pedido que fue enviado
+     *
      * @param p. Pedido a serializar
-     * @param idPedido. Identificador del pedido a serializar 
+     * @param idPedido. Identificador del pedido a serializar
      */
     public void EscribirArchivoPedidoSerialido(Pedido p, int idPedido) {
         try ( ObjectOutputStream obj = new ObjectOutputStream(new FileOutputStream("pedido" + idPedido + ".bin"))) {
