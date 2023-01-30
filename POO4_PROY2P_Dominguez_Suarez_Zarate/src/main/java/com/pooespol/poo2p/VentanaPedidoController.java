@@ -155,14 +155,14 @@ public class VentanaPedidoController implements Initializable {
                 cargarListaPedido(ListaPedido);
 
             } else if (opcionEscogida.equals("NOMBRE")) {
-                Collections.sort(ListaPedido, new Comparator<Pedido>(){
+                Collections.sort(ListaPedido, new Comparator<Pedido>() {
                     @Override
                     public int compare(Pedido o1, Pedido o2) {
                         return o1.getDescripcion().compareToIgnoreCase(o2.getDescripcion());
                     }
                 });
                 cargarListaPedido(ListaPedido);
-                
+
             }
 
         });
@@ -293,7 +293,7 @@ public class VentanaPedidoController implements Initializable {
 
                         Subtotal += precioPorCantidad;
                         txtSubtotal.setText(String.valueOf(Subtotal));
-                        DecimalFormat df= new DecimalFormat("#.00");
+                        DecimalFormat df = new DecimalFormat("#.00");
 
                         Iva = Subtotal * 0.12;
                         txtIva.setText(String.valueOf(df.format(Iva)));
@@ -354,12 +354,12 @@ public class VentanaPedidoController implements Initializable {
      */
     @FXML
     public void cambiarVentanaDireccion(ActionEvent event) {
+        DecimalFormat df = new DecimalFormat("#.00"); 
         // Cuando se da continuar se escriben los archivos
         if (!(txtTotal.getText().isEmpty()) && !(txtTotal.getText().equals("0.00"))) {
             idPedido = (int) (Math.random() * 9999 + 1111);
             Pedido pO = new Pedido(ListaPedido, cl, "null", Subtotal, Iva, Total);
             EscribirArchivoPedido(idPedido, cl.getNombre(), Total);
-            
 
             VBox root2 = new VBox();
             Stage stage = new Stage();
@@ -433,14 +433,15 @@ public class VentanaPedidoController implements Initializable {
 
             //METODO PAGO
             efectivo.addEventHandler(ActionEvent.ACTION, (Event t) -> {
+                String totaldf=df.format(Total);
                 tipo = "E";
                 seccionPago.getChildren().clear();
-                descripcionPago.setText("Tendrá que pagar un total de " + Total + " dólares" + "\n" + "Asegurese de tener el dinero completo por si el repartidor "
+                descripcionPago.setText("Tendrá que pagar un total de " + (totaldf) + " dólares" + "\n" + "Asegurese de tener el dinero completo por si el repartidor "
                         + "no tiene cambio");
             });
             tarjeta.addEventHandler(ActionEvent.ACTION, (Event t) -> {
+                String totaldf1=df.format(Total +(Total*0.05));
                 seccionPago.setVisible(true);
-
                 seccionPago.getChildren().clear();
                 tipo = "C";
 
@@ -455,7 +456,7 @@ public class VentanaPedidoController implements Initializable {
 
                 seccionPago.setSpacing(10);
 
-                descripcionPago.setText("Tendrá que pagar un total de " + (Total + (Total * 0.05)) + " por el incremento del 5% por uso de tarjeta");
+                descripcionPago.setText("Tendrá que pagar un total de " + totaldf1 + " por el incremento del 5% por uso de tarjeta");
 
                 seccionPago.getChildren().addAll(labels, textfields);
             });
@@ -470,17 +471,30 @@ public class VentanaPedidoController implements Initializable {
                 } else if (tarjeta.isSelected() && (txtTitular.getText().isEmpty() | txtnumero.getText().isEmpty()
                         | txtCaducidad.getText().isEmpty() | txtCVV.getText().isEmpty())) {
                     Optional<ButtonType> opciones = alerta.showAndWait();
-                    
+
                 } else {
+                    
+                    String totaldf1=df.format(Total +(Total*0.05));
                     pO.setDireccion(direccion2.getText());
                     EscribirArchivoPedidoSerialido(pO, idPedido);
                     int idPago = (int) (Math.random() * 9999 + 1111);
-                    try ( BufferedWriter bfw = new BufferedWriter(new FileWriter("Pagos.txt", true))) {
-                        LocalDate fechahoy = LocalDate.now();
-                        bfw.write("\n" + idPago + "," + idPedido + "," + cl.getNombre() + "," + Total + "," + fechahoy + "," + tipo);
+                    if (tipo.equals("E")) {
+                        try ( BufferedWriter bfw = new BufferedWriter(new FileWriter("Pagos.txt", true))) {
+                            LocalDate fechahoy = LocalDate.now();
+                            bfw.write("\n" + idPago + "," + idPedido + "," + cl.getNombre() + "," + Total + "," + fechahoy + "," + tipo);
 
-                    } catch (IOException ex) {
-                        System.out.println("Error al escribir el archivo");
+                        } catch (IOException ex) {
+                            System.out.println("Error al escribir el archivo");
+                        }
+                    } else if (tipo.equals("C")) {
+                        try ( BufferedWriter bfw = new BufferedWriter(new FileWriter("Pagos.txt", true))) {
+                            LocalDate fechahoy = LocalDate.now();
+                            bfw.write("\n" + idPago + "," + idPedido + "," + cl.getNombre() + "," + (totaldf1) + "," + fechahoy + "," + tipo);
+
+                        } catch (IOException ex) {
+                            System.out.println("Error al escribir el archivo");
+                        }
+
                     }
 
                     Stage stage3 = (Stage) continuar.getScene().getWindow();
